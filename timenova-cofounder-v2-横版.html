@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时初之光 TimeNova 创始人 IP 打造思路</title>
+  <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/3.0.23/tailwind.min.js"></script>
+  <link href="https://fonts.loli.net/css2?family=Inter:wght@300;400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans SC', 'Inter', sans-serif; background: #000; color: #fff; overflow: hidden; }
+    .slides-container { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+    .slide { width: 100%; height: 100%; max-width: 1200px; max-height: 675px; aspect-ratio: 16/9; position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; opacity: 0; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; background: linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%); }
+    .slide.active { opacity: 1; transform: translateX(0); }
+    .slide.prev { opacity: 0; transform: translateX(-100%); }
+    .light-spot { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; pointer-events: none; }
+    .light-spot-1 { width: 500px; height: 500px; background: #3b82f6; top: -200px; right: -150px; animation: float1 20s ease-in-out infinite; }
+    .light-spot-2 { width: 400px; height: 400px; background: #8b5cf6; bottom: -150px; left: -100px; animation: float2 25s ease-in-out infinite; }
+    .light-spot-3 { width: 350px; height: 350px; background: #06b6d4; top: 30%; left: 50%; transform: translate(-50%, -50%); animation: float3 18s ease-in-out infinite; }
+    .light-spot-gold { width: 450px; height: 450px; background: #f59e0b; top: -150px; left: -150px; animation: float1 22s ease-in-out infinite; }
+    .light-spot-pink { width: 380px; height: 380px; background: #ec4899; bottom: -100px; right: -100px; animation: float2 20s ease-in-out infinite; }
+    .light-spot-emerald { width: 400px; height: 400px; background: #10b981; top: 20%; right: -200px; animation: float3 20s ease-in-out infinite; }
+    @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-50px, 30px); } 50% { transform: translate(30px, 50px); } 75% { transform: translate(50px, -20px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(40px, -40px); } 66% { transform: translate(-30px, 30px); } }
+    @keyframes float3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.2); } }
+    .slide-content { position: relative; z-index: 10; text-align: center; width: 100%; max-width: 1000px; }
+    .progress-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
+    .progress-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; }
+    .progress-dot.active { background: #fff; transform: scale(1.3); }
+    .progress-dot:hover { background: rgba(255,255,255,0.6); }
+    .page-number { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 0.875rem; color: rgba(255,255,255,0.4); z-index: 100; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .card { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 1.5rem; text-align: left; }
+    .card-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem; }
+    .card-desc { font-size: 0.85rem; color: #9ca3af; }
+    .tag { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; margin: 0.2rem; }
+  </style>
+</head>
+<body>
+  <div class="slides-container">
+    
+    <!-- 1. 封面 -->
+    <div class="slide active">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <h1 class="text-5xl font-black mb-6">时初之光 <span class="text-amber-400">TimeNova</span></h1>
+        <p class="text-2xl font-light text-gray-300 mb-4">创始人 IP 打造思路</p>
+        <p class="text-lg text-gray-500">冰总 × Melody × 响妈 × 潘潘姐</p>
+      </div>
+    </div>
+    
+    <!-- 2. 品牌定位 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">品牌定位</h2>
+        <div class="grid-2">
+          <div>
+            <p class="text-2xl font-light text-gray-300 mb-4">功能医学 · 细胞级抗衰</p>
+            <p class="text-xl text-gray-400">高净值生命质量管家</p>
+          </div>
+          <div class="flex items-center justify-center gap-4 flex-wrap">
+            <span class="tag bg-amber-500/30 text-amber-400 text-lg">冰总</span>
+            <span class="tag bg-blue-500/30 text-blue-400 text-lg">Melody</span>
+            <span class="tag bg-purple-500/30 text-purple-400 text-lg">响妈</span>
+            <span class="tag bg-pink-500/30 text-pink-400 text-lg">潘潘姐</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 3. 创始人矩阵 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">创始人矩阵</h2>
+        <div class="grid-4">
+          <div class="card">
+            <p class="card-title text-amber-400">冰总</p>
+            <p class="card-desc">不露脸的"逆龄推手"</p>
+            <p class="card-desc">智性贵妇 · Ins风美学</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-blue-400">Melody</p>
+            <p class="card-desc">高净值人群的"生命质量架构师"</p>
+            <p class="card-desc">44岁高能二胎母亲</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-purple-400">响妈</p>
+            <p class="card-desc">温柔坚定的"健康搭子"</p>
+            <p class="card-desc">拒绝内耗的创业妈妈</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-pink-400">潘潘姐</p>
+            <p class="card-desc">全能"生命管家"</p>
+            <p class="card-desc">E人反差 · 嘴毒心软</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4. 冰总 IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-2 text-amber-400">冰总 · 不露脸 IP</h2>
+        <p class="text-xl text-gray-400 mb-8">逆龄推手 · 智性贵妇 · 高阶审美</p>
+        <div class="grid-2">
+          <div class="card">
+            <p class="card-title">核心人设</p>
+            <p class="card-desc">长寿诊所投资人 · Ins风美学博主 · 不老极客</p>
+          </div>
+          <div class="card">
+            <p class="card-title">内容系列</p>
+            <p class="card-desc">《贵妇的抗衰晨间清单》《创始人的一天》《冰总的审美私藏》</p>
+          </div>
+          <div class="card">
+            <p class="card-title">视觉逻辑</p>
+            <p class="card-desc">从"看脸"转向"看场" · 五大核心机位</p>
+          </div>
+          <div class="card">
+            <p class="card-title">记忆点</p>
+            <p class="card-desc">"时间不是敌手，是勋章"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 5. Melody IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-emerald"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-2 text-blue-400">Melody · 高能并存 IP</h2>
+        <p class="text-xl text-gray-400 mb-8">高净值人群的"生命质量架构师"</p>
+        <div class="grid-2">
+          <div class="card">
+            <p class="card-title">多维身份</p>
+            <p class="card-desc">左手家办 · 右手大健康 · 千人保险团队长 · 44岁高能二胎母亲</p>
+          </div>
+          <div class="card">
+            <p class="card-title">核心叙事</p>
+            <p class="card-desc">"我不靠硬扛，我靠精准的系统设计和极致的生命能量管理"</p>
+          </div>
+          <div class="card">
+            <p class="card-title">内容专栏</p>
+            <p class="card-desc">《顶配人生的双核驱动》《高能女性的后台管理》《先锋视角的家庭合伙人》</p>
+          </div>
+          <div class="card">
+            <p class="card-title">记忆点</p>
+            <p class="card-desc">"我不做选择，我做加法"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 6. 响妈 IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-2 text-purple-400">响妈 · 温柔坚定 IP</h2>
+        <p class="text-xl text-gray-400 mb-8">温柔坚定的"健康搭子"</p>
+        <div class="grid-2">
+          <div class="card">
+            <p class="card-title">人设标签</p>
+            <p class="card-desc">内核稳定的淡人 · 功能医学实践者 · 拒绝内耗的创业妈妈</p>
+          </div>
+          <div class="card">
+            <p class="card-title">内容专栏</p>
+            <p class="card-desc">逻辑说健康 · 淡人的创业史 · 爱的仪式感 · 心灵滋养清单</p>
+          </div>
+          <div class="card">
+            <p class="card-title">内容方向</p>
+            <p class="card-desc">悦己型健康 Vlog + 观点型健康 Vlog</p>
+          </div>
+          <div class="card">
+            <p class="card-title">记忆点</p>
+            <p class="card-desc">"爱自己什么时候都不晚"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 7. 潘潘姐 IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-pink"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-2 text-pink-400">潘潘姐 · E人反差 IP</h2>
+        <p class="text-xl text-gray-400 mb-8">全能"生命管家" · 最怕客户走得早</p>
+        <div class="grid-2">
+          <div class="card">
+            <p class="card-title">内容赛道</p>
+            <p class="card-desc">专业反差类 · 科技开箱类 · 不内耗的中年类</p>
+          </div>
+          <div class="card">
+            <p class="card-title">视觉形象</p>
+            <p class="card-desc">职业装外面套个白大褂 · 一边敷面膜一边算保单</p>
+          </div>
+          <div class="card">
+            <p class="card-title">三大避坑</p>
+            <p class="card-desc">分清主次 · 合规性 · 弱化销售感</p>
+          </div>
+          <div class="card">
+            <p class="card-title">记忆点</p>
+            <p class="card-desc">"保单在手，长命百岁"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 8. 内容漏斗 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-emerald"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">Melody 内容漏斗模型</h2>
+        <div class="grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;">
+          <div class="card" style="border-left: 4px solid #3b82f6;">
+            <p class="card-title text-blue-400">引流层 30%</p>
+            <p class="card-desc mb-2">展现"高能并存"状态</p>
+            <p class="text-sm text-gray-500">《44岁二胎妈妈的高效时间折叠术》</p>
+            <p class="text-sm text-gray-500">《为什么把儿子送进先锋学校？》</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #8b5cf6;">
+            <p class="card-title text-purple-400">信任层 50%</p>
+            <p class="card-desc mb-2">展现逻辑与专业深度</p>
+            <p class="text-sm text-gray-500">《财富与生命的双重风控》</p>
+            <p class="text-sm text-gray-500">《用金融查账的严谨度追回体力》</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #10b981;">
+            <p class="card-title text-green-400">转化层 20%</p>
+            <p class="card-desc mb-2">释放事业机会</p>
+            <p class="text-sm text-gray-500">《40岁后重新掌控人生》</p>
+            <p class="text-sm text-gray-500">Vlog《高能的一天》</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 9. 平台策略 -->
+    <div class="slide">
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">平台策略</h2>
+        <div class="grid-4">
+          <div class="card">
+            <p class="card-title text-amber-400">冰总</p>
+            <p class="card-desc">小红书 + 视频号</p>
+            <p class="card-desc">Ins风氛围感</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-blue-400">Melody</p>
+            <p class="card-desc">视频号为主</p>
+            <p class="card-desc">私域转化池</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-purple-400">响妈</p>
+            <p class="card-desc">小红书为主</p>
+            <p class="card-desc">30+女性阵地</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-pink-400">潘潘姐</p>
+            <p class="card-desc">短视频为主</p>
+            <p class="card-desc">反差搞笑</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 10. 视觉风格 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-1"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">视觉风格</h2>
+        <div class="grid-4">
+          <div class="card">
+            <p class="card-title text-amber-400">冰总</p>
+            <p class="card-desc">Ins风高饱和度</p>
+            <p class="card-desc">米灰、奶白</p>
+            <p class="card-desc">不露脸</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-blue-400">Melody</p>
+            <p class="card-desc">精英切面风</p>
+            <p class="card-desc">西装、真丝</p>
+            <p class="card-desc">双线混剪</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-purple-400">响妈</p>
+            <p class="card-desc">低饱和温柔风</p>
+            <p class="card-desc">莫兰迪色</p>
+            <p class="card-desc">质感穿搭</p>
+          </div>
+          <div class="card">
+            <p class="card-title text-pink-400">潘潘姐</p>
+            <p class="card-desc">反差萌</p>
+            <p class="card-desc">职业装+白大褂</p>
+            <p class="card-desc">真实感</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 11. 冷启动节奏 -->
+    <div class="slide">
+      <div class="light-spot light-spot-emerald"></div>
+      <div class="light-spot light-spot-pink"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">冷启动节奏 · 前30天</h2>
+        <div class="grid-2" style="max-width: 800px; margin: 0 auto;">
+          <div class="card" style="border-left: 4px solid #f59e0b;">
+            <p class="card-title">第一阶段 · Week 1-2</p>
+            <p class="card-desc">发布置顶 TVC</p>
+            <p class="text-lg font-bold mt-2">《44岁，我依然在做人生的加法》</p>
+            <p class="card-desc mt-2">完成原始身份定调</p>
+          </div>
+          <div class="card" style="border-left: 4px solid #3b82f6;">
+            <p class="card-title">第二阶段 · Week 3-4</p>
+            <p class="card-desc">每周2-3更</p>
+            <p class="text-lg font-bold mt-2">深度口播 × 1 + Vlog × 1</p>
+            <p class="card-desc mt-2">交叉输出，建立信任</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 12. 对比总结 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-8">四大创始人对比</h2>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+              <th style="padding: 0.75rem; text-align: left; color: #9ca3af;">创始人</th>
+              <th style="padding: 0.75rem; text-align: left; color: #9ca3af;">出镜方式</th>
+              <th style="padding: 0.75rem; text-align: left; color: #9ca3af;">核心气质</th>
+              <th style="padding: 0.75rem; text-align: left; color: #9ca3af;">最强记忆点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <td style="padding: 0.75rem; color: #fbbf24;">冰总</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">不露脸</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">智性贵妇</td>
+              <td style="padding: 0.75rem; color: #fbbf24;">时间不是敌手，是勋章</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <td style="padding: 0.75rem; color: #60a5fa;">Melody</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">全面出镜</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">高能并存</td>
+              <td style="padding: 0.75rem; color: #60a5fa;">我不做选择，我做加法</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <td style="padding: 0.75rem; color: #c084fc;">响妈</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">全面出镜</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">温柔坚定</td>
+              <td style="padding: 0.75rem; color: #c084fc;">爱自己什么时候都不晚</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; color: #f472b6;">潘潘姐</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">全面出镜</td>
+              <td style="padding: 0.75rem; color: #d1d5db;">E人反差</td>
+              <td style="padding: 0.75rem; color: #f472b6;">保单在手，长命百岁</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 13. 核心总结 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <span class="text-7xl text-gray-600 block mb-4">"</span>
+        <p class="text-4xl font-bold mb-6">四位创始人，四种路径<br>统一在"时初之光"品牌下</p>
+        <p class="text-2xl font-light text-gray-400">用自己活生生的结果，为产品代言</p>
+        <p class="text-xl text-gray-500 mt-4">这是 IP 最强的护城河</p>
+      </div>
+    </div>
+    
+    <!-- 14. 结尾 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h1 class="text-4xl font-bold mb-6">活成 TimeNova<br>最好的代言人</h1>
+        <p class="text-xl text-gray-400">时初之光 TimeNova</p>
+        <p class="text-lg text-gray-500 mt-2">创始人 IP 打造方案</p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="page-number" id="pageNumber">1 / 14</div>
+  
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${index === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => goToSlide(index));
+      progressBar.appendChild(dot);
+    });
+    
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active', 'prev');
+        if (index === currentSlide) slide.classList.add('active');
+        else if (index < currentSlide) slide.classList.add('prev');
+      });
+      document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
+    function goToSlide(index) { currentSlide = index; updateSlides(); }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      else if (e.key === 'ArrowLeft') prevSlide();
+    });
+    
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+    });
+  </script>
+</body>
+</html>

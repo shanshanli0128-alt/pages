@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时初之光 TimeNova 创始人 IP 打造思路</title>
+  <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/3.0.23/tailwind.min.js"></script>
+  <link href="https://fonts.loli.net/css2?family=Inter:wght@300;400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans SC', 'Inter', sans-serif; background: #000; color: #fff; overflow: hidden; }
+    .slides-container { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a0a; }
+    .slide { width: 100%; height: 100%; max-width: 450px; max-height: 800px; aspect-ratio: 9/16; position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; opacity: 0; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%); }
+    .slide.active { opacity: 1; transform: translateX(0); }
+    .slide.prev { opacity: 0; transform: translateX(-100%); }
+    .light-spot { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; pointer-events: none; }
+    .light-spot-1 { width: 300px; height: 300px; background: #3b82f6; top: -100px; right: -100px; animation: float1 20s ease-in-out infinite; }
+    .light-spot-2 { width: 250px; height: 250px; background: #8b5cf6; bottom: -80px; left: -80px; animation: float2 25s ease-in-out infinite; }
+    .light-spot-3 { width: 200px; height: 200px; background: #06b6d4; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: float3 18s ease-in-out infinite; }
+    .light-spot-gold { width: 280px; height: 280px; background: #f59e0b; top: -80px; left: -80px; animation: float1 22s ease-in-out infinite; }
+    .light-spot-pink { width: 220px; height: 220px; background: #ec4899; bottom: -60px; right: -60px; animation: float2 20s ease-in-out infinite; }
+    .light-spot-emerald { width: 240px; height: 240px; background: #10b981; top: 50%; right: -100px; animation: float3 20s ease-in-out infinite; }
+    @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-50px, 30px); } 50% { transform: translate(30px, 50px); } 75% { transform: translate(50px, -20px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(40px, -40px); } 66% { transform: translate(-30px, 30px); } }
+    @keyframes float3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.2); } }
+    .slide-content { position: relative; z-index: 10; text-align: center; width: 100%; }
+    .progress-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; }
+    .progress-dot.active { background: #fff; transform: scale(1.3); }
+    .progress-dot:hover { background: rgba(255,255,255,0.6); }
+    .page-number { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 0.875rem; color: rgba(255,255,255,0.4); z-index: 100; }
+    .list-item { text-align: left; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
+    .list-item:last-child { border-bottom: none; }
+    .tag { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; margin: 0.15rem; }
+  </style>
+</head>
+<body>
+  <div class="slides-container">
+    
+    <!-- 1. 封面 -->
+    <div class="slide active">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <h1 class="text-3xl font-black mb-4">时初之光<br>TimeNova</h1>
+        <p class="text-lg font-bold text-amber-400 mb-2">创始人 IP 打造思路</p>
+        <p class="text-sm font-light text-gray-400">冰总 × Melody × 响妈 × 潘潘姐</p>
+      </div>
+    </div>
+    
+    <!-- 2. 品牌定位 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-6">品牌定位</h2>
+        <p class="text-xl font-light text-gray-300">功能医学 · 细胞级抗衰</p>
+        <p class="text-lg font-light text-gray-400 mt-2">高净值生命质量管家</p>
+        <div class="mt-8">
+          <span class="tag bg-amber-500/30 text-amber-400">冰总</span>
+          <span class="tag bg-blue-500/30 text-blue-400">Melody</span>
+          <span class="tag bg-purple-500/30 text-purple-400">响妈</span>
+          <span class="tag bg-pink-500/30 text-pink-400">潘潘姐</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 3. 创始人矩阵 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-6">创始人矩阵</h2>
+        <div class="space-y-3">
+          <div class="text-left list-item">
+            <p class="text-amber-400 font-bold">冰总</p>
+            <p class="text-gray-400 text-sm">不露脸的"逆龄推手" · 智性贵妇</p>
+          </div>
+          <div class="text-left list-item">
+            <p class="text-blue-400 font-bold">Melody</p>
+            <p class="text-gray-400 text-sm">高净值人群的"生命质量架构师"</p>
+          </div>
+          <div class="text-left list-item">
+            <p class="text-purple-400 font-bold">响妈</p>
+            <p class="text-gray-400 text-sm">温柔坚定的"健康搭子"</p>
+          </div>
+          <div class="text-left list-item">
+            <p class="text-pink-400 font-bold">潘潘姐</p>
+            <p class="text-gray-400 text-sm">全能"生命管家" · 最怕客户走得早</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4. 冰总 IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-2 text-amber-400">冰总</h2>
+        <h3 class="text-lg font-bold mb-4">不露脸 · 强氛围</h3>
+        <div class="text-left space-y-2 text-sm">
+          <p>• 逆龄推手 · 长寿诊所投资人</p>
+          <p>• Ins风美学 · 高阶审美</p>
+          <p>• 智性贵妇 · 不老极客</p>
+        </div>
+        <p class="text-sm text-gray-400 mt-4">"时间不是敌手，是勋章"</p>
+      </div>
+    </div>
+    
+    <!-- 5. Melody IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-emerald"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-2 text-blue-400">Melody</h2>
+        <h3 class="text-lg font-bold mb-4">高能并存 · 极度坦然</h3>
+        <div class="text-left space-y-2 text-sm">
+          <p>• 左手家办 · 右手大健康</p>
+          <p>• 44岁高能二胎母亲</p>
+          <p>• 千人保险团队长</p>
+        </div>
+        <p class="text-sm text-gray-400 mt-4">"我不做选择，我做加法"</p>
+      </div>
+    </div>
+    
+    <!-- 6. 响妈 IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-2 text-purple-400">响妈</h2>
+        <h3 class="text-lg font-bold mb-4">温柔坚定 · 健康搭子</h3>
+        <div class="text-left space-y-2 text-sm">
+          <p>• 内核稳定的淡人</p>
+          <p>• 功能医学实践者</p>
+          <p>• 拒绝内耗的创业妈妈</p>
+        </div>
+        <p class="text-sm text-gray-400 mt-4">"爱自己什么时候都不晚"</p>
+      </div>
+    </div>
+    
+    <!-- 7. 潘潘姐 IP -->
+    <div class="slide">
+      <div class="light-spot light-spot-pink"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-2 text-pink-400">潘潘姐</h2>
+        <h3 class="text-lg font-bold mb-4">E人反差 · 生命管家</h3>
+        <div class="text-left space-y-2 text-sm">
+          <p>• 大大大E人 · 嘴毒心软</p>
+          <p>• 保险 + 长寿诊所双线</p>
+          <p>• 科技尝鲜者</p>
+        </div>
+        <p class="text-sm text-gray-400 mt-4">"保单在手，长命百岁"</p>
+      </div>
+    </div>
+    
+    <!-- 8. 冰总内容系列 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-4 text-amber-400">冰总内容系列</h2>
+        <div class="space-y-3 text-sm text-left">
+          <div class="list-item">
+            <p class="font-bold">《贵妇的抗衰晨间清单》</p>
+            <p class="text-gray-400">养生早餐、手部特写、Ins风居家</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">《创始人的一天》</p>
+            <p class="text-gray-400">侧后方拍摄工作态、事业女性</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">《冰总的审美私藏》</p>
+            <p class="text-gray-400">家居陈设、穿搭OOTD</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 9. Melody内容漏斗 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-emerald"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-6">Melody 内容漏斗</h2>
+        <div class="space-y-3">
+          <div class="bg-blue-500/20 rounded-lg p-3">
+            <p class="text-blue-400 font-bold text-sm">引流层 30%</p>
+            <p class="text-xs text-gray-300">时间折叠术、教育理念反差</p>
+          </div>
+          <div class="bg-purple-500/20 rounded-lg p-3">
+            <p class="text-purple-400 font-bold text-sm">信任层 50%</p>
+            <p class="text-xs text-gray-300">金融逻辑、功能医学数据</p>
+          </div>
+          <div class="bg-green-500/20 rounded-lg p-3">
+            <p class="text-green-400 font-bold text-sm">转化层 20%</p>
+            <p class="text-xs text-gray-300">事业机会、合伙人招募</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 10. 响妈内容专栏 -->
+    <div class="slide">
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-4 text-purple-400">响妈内容专栏</h2>
+        <div class="space-y-3 text-sm text-left">
+          <div class="list-item">
+            <p class="font-bold">逻辑说健康</p>
+            <p class="text-gray-400">拆解功能医学，只讲原理不卖货</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">淡人的创业史</p>
+            <p class="text-gray-400">柔性管理团队、创业故事</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">爱的仪式感</p>
+            <p class="text-gray-400">营养早餐、亲子互动</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">心灵滋养清单</p>
+            <p class="text-gray-400">推书、电影、呼吸法</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 11. 潘潘姐内容赛道 -->
+    <div class="slide">
+      <div class="light-spot light-spot-pink"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-4 text-pink-400">潘潘姐内容赛道</h2>
+        <div class="space-y-3 text-sm text-left">
+          <div class="list-item">
+            <p class="font-bold">专业反差类</p>
+            <p class="text-gray-400">职业装+白大褂反差</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">科技开箱类</p>
+            <p class="text-gray-400">高压氧舱、NAD+实测</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">不内耗的中年类</p>
+            <p class="text-gray-400">"中年人的最高级自律"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 12. 平台策略 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-6">平台策略</h2>
+        <div class="space-y-3 text-sm">
+          <div class="text-left">
+            <p class="text-amber-400 font-bold">冰总</p>
+            <p class="text-gray-400">小红书 + 视频号 · Ins风氛围</p>
+          </div>
+          <div class="text-left">
+            <p class="text-blue-400 font-bold">Melody</p>
+            <p class="text-gray-400">视频号为主 · 私域转化</p>
+          </div>
+          <div class="text-left">
+            <p class="text-purple-400 font-bold">响妈</p>
+            <p class="text-gray-400">小红书为主 · 30+女性</p>
+          </div>
+          <div class="text-left">
+            <p class="text-pink-400 font-bold">潘潘姐</p>
+            <p class="text-gray-400">短视频为主 · 反差搞笑</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 13. 视觉风格 -->
+    <div class="slide">
+      <div class="light-spot light-spot-3"></div>
+      <div class="light-spot light-spot-emerald"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-6">视觉风格</h2>
+        <div class="space-y-3 text-sm text-left">
+          <div class="list-item">
+            <p class="text-amber-400 font-bold">冰总</p>
+            <p class="text-gray-400">Ins风 · 米灰奶白 · 不露脸</p>
+          </div>
+          <div class="list-item">
+            <p class="text-blue-400 font-bold">Melody</p>
+            <p class="text-gray-400">精英切面 · 西装真丝 · 双线</p>
+          </div>
+          <div class="list-item">
+            <p class="text-purple-400 font-bold">响妈</p>
+            <p class="text-gray-400">低饱和温柔 · 莫兰迪色</p>
+          </div>
+          <div class="list-item">
+            <p class="text-pink-400 font-bold">潘潘姐</p>
+            <p class="text-gray-400">反差萌 · 职业装+白大褂</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 14. 冷启动节奏 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-1"></div>
+      <div class="slide-content">
+        <h2 class="text-xl font-bold mb-6">冷启动节奏</h2>
+        <div class="space-y-4 text-sm text-left">
+          <div class="list-item">
+            <p class="font-bold">Week 1-2</p>
+            <p class="text-gray-400">置顶 TVC《44岁，我依然在做人生的加法》</p>
+          </div>
+          <div class="list-item">
+            <p class="font-bold">Week 3-4</p>
+            <p class="text-gray-400">每周2-3更：深度口播 + Vlog</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 15. 核心总结 -->
+    <div class="slide">
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="light-spot light-spot-3"></div>
+      <div class="slide-content">
+        <span class="text-5xl text-gray-600 block mb-4">"</span>
+        <p class="text-2xl font-bold mb-6">四位创始人，四种路径<br>统一在"时初之光"品牌下</p>
+        <p class="text-lg font-light text-gray-400">用自己活生生的结果<br>为产品代言</p>
+      </div>
+    </div>
+    
+    <!-- 16. 结尾 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-1"></div>
+      <div class="light-spot light-spot-2"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-8">活成 TimeNova<br>最好的代言人</h2>
+        <p class="text-base font-light text-gray-400">时初之光 TimeNova</p>
+        <p class="text-sm font-light text-gray-500 mt-2">创始人 IP 打造方案</p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="page-number" id="pageNumber">1 / 16</div>
+  
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${index === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => goToSlide(index));
+      progressBar.appendChild(dot);
+    });
+    
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active', 'prev');
+        if (index === currentSlide) slide.classList.add('active');
+        else if (index < currentSlide) slide.classList.add('prev');
+      });
+      document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
+    function goToSlide(index) { currentSlide = index; updateSlides(); }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      else if (e.key === 'ArrowLeft') prevSlide();
+    });
+    
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+    });
+  </script>
+</body>
+</html>
