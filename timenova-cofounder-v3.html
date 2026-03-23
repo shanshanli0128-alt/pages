@@ -29,6 +29,8 @@
     .progress-dot.active { background: #fff; transform: scale(1.3); }
     .progress-dot:hover { background: rgba(255,255,255,0.6); }
     .page-number { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 0.875rem; color: rgba(255,255,255,0.4); z-index: 100; }
+    .fullscreen-btn { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: rgba(255,255,255,0.6); cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .fullscreen-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     .card { background: rgba(255,255,255,0.05); border-radius: 1rem; padding: 1.5rem; text-align: left; }
@@ -409,7 +411,24 @@
   <div class="progress-bar" id="progressBar"></div>
   <div class="page-number" id="pageNumber">1 / 14</div>
   
+  <button class="fullscreen-btn" onclick="toggleFullscreen()" title="全屏演示 (ESC退出)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+  </button>
+  
   <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    });
     const slides = document.querySelectorAll('.slide');
     const progressBar = document.getElementById('progressBar');
     const pageNumber = document.getElementById('pageNumber');
