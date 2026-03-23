@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeNova 时初之光 品牌介绍</title>
+  <script src="https://lf26-cdn-tos.bytedance.com/cdn/expire-1-M/tailwindcss/3.0.23/tailwind.min.js"></script>
+  <link href="https://fonts.loli.net/css2?family=Inter:wght@300;400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans SC', 'Inter', sans-serif; background: #0a0a12; color: #fff; overflow: hidden; }
+    .slides-container { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a12; }
+    .slide { width: 100%; height: 100%; max-width: 1200px; max-height: 675px; aspect-ratio: 16/9; position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; opacity: 0; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; background: linear-gradient(145deg, #0f0f1a 0%, #1a1025 50%, #0a0a12 100%); }
+    .slide.active { opacity: 1; transform: translateX(0); }
+    .slide.prev { opacity: 0; transform: translateX(-100%); }
+    .light-spot { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; pointer-events: none; }
+    .light-spot-purple { width: 500px; height: 500px; background: #7c3aed; top: -200px; right: -150px; animation: float1 25s ease-in-out infinite; }
+    .light-spot-gold { width: 400px; height: 400px; background: #f59e0b; bottom: -150px; left: -100px; animation: float2 22s ease-in-out infinite; }
+    .light-spot-pink { width: 350px; height: 350px; background: #ec4899; top: 30%; left: 50%; transform: translate(-50%, -50%); animation: float3 20s ease-in-out infinite; }
+    .light-spot-blue { width: 300px; height: 300px; background: #3b82f6; top: -100px; left: -50px; animation: float2 18s ease-in-out infinite; }
+    .light-spot-white { width: 280px; height: 280px; background: #fff; top: 50%; right: -80px; opacity: 0.08; animation: float3 15s ease-in-out infinite; }
+    @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-60px, 40px); } 50% { transform: translate(40px, 60px); } 75% { transform: translate(60px, -30px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(50px, -50px); } 66% { transform: translate(-40px, 40px); } }
+    @keyframes float3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.3); } }
+    .slide-content { position: relative; z-index: 10; text-align: center; width: 100%; max-width: 1000px; }
+    .progress-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; }
+    .progress-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; }
+    .progress-dot.active { background: #f59e0b; transform: scale(1.4); }
+    .progress-dot:hover { background: rgba(255,255,255,0.6); }
+    .page-number { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 0.875rem; color: rgba(255,255,255,0.4); z-index: 100; }
+    .fullscreen-btn { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: rgba(255,255,255,0.6); cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .fullscreen-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .quadrant { position: relative; width: 100%; max-width: 600px; height: 350px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.2); }
+    .quadrant-line-h { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.15); }
+    .quadrant-line-v { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.15); }
+    .quadrant-label { position: absolute; font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+    .quadrant-tl { top: 10px; left: 10px; }
+    .quadrant-tr { top: 10px; right: 10px; }
+    .quadrant-bl { bottom: 10px; left: 10px; }
+    .quadrant-br { bottom: 10px; right: 10px; }
+    .quadrant-our { position: absolute; top: 15%; right: 15%; background: rgba(245,158,11,0.2); border: 2px solid #f59e0b; border-radius: 12px; padding: 1rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="slides-container">
+    
+    <!-- Slide 1: 封面 -->
+    <div class="slide active">
+      <div class="light-spot light-spot-purple"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-pink"></div>
+      <div class="slide-content">
+        <h1 class="text-5xl font-black mb-4">TimeNova <span class="text-amber-400">时初之光</span></h1>
+        <p class="text-2xl font-light text-gray-300 mb-6">时间向前，生命向初。</p>
+        <p class="text-lg text-gray-500">以功能医学为基础的生命状态管理平台</p>
+      </div>
+    </div>
+    
+    <!-- Slide 2: 品牌起源 -->
+    <div class="slide">
+      <div class="light-spot light-spot-white"></div>
+      <div class="slide-content">
+        <h2 class="text-3xl font-bold mb-2">品牌起源</h2>
+        <p class="text-amber-400 text-lg mb-8">Brand Origin</p>
+        <div class="text-left space-y-6 max-w-700 mx-auto">
+          <p class="text-xl">对抗生命的<span class="text-red-400">"熵增"</span></p>
+          <p class="text-lg text-gray-400">人体的衰退，本质上是生命系统不可逆的</p>
+          <p class="text-lg text-gray-400">有序向无序的耗散过程。</p>
+          <div class="border-t border-gray-700 pt-6 mt-6">
+            <p class="text-lg">时初之光，诞生于一群深耕功能医学领域的女性创业团队。</p>
+            <p class="text-gray-400 mt-3">我们深知高净值人群对长期生命质量的追求，致力于向内探寻，在细胞深处重建秩序。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 3: 行业定位 -->
+    <div class="slide">
+      <div class="light-spot light-spot-purple"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">行业定位</h2>
+        <p class="text-amber-400 text-sm mb-6">领航细胞级生命能量管理</p>
+        
+        <div class="quadrant">
+          <div class="quadrant-line-h"></div>
+          <div class="quadrant-line-v"></div>
+          <span class="quadrant-label quadrant-tl">生活美容<br>医疗冰冷</span>
+          <span class="quadrant-label quadrant-tr">前沿科技<br>舒适体验</span>
+          <span class="quadrant-label quadrant-bl">传统体检<br>流于数据</span>
+          <div class="quadrant-our">
+            <p class="text-amber-400 font-bold">TimeNova</p>
+            <p class="text-xs text-gray-300 mt-1">精准检测 + 负熵干预 + 柔韧赋能</p>
+          </div>
+        </div>
+        
+        <div class="mt-6 text-left max-w-700 mx-auto">
+          <p class="text-sm text-gray-400">行业痛点：医美粉饰表象 | 传统体检流于数据 | 传统点滴盲目补充</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 4: 精准溯源 -->
+    <div class="slide">
+      <div class="light-spot light-spot-blue"></div>
+      <div class="light-spot light-spot-purple"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">精准溯源</h2>
+        <p class="text-blue-400 text-sm mb-6">Core Business - Assessment</p>
+        
+        <div class="grid-2 gap-8 text-left">
+          <div>
+            <p class="text-3xl font-bold text-blue-400 mb-4">精密检测</p>
+            <p class="text-gray-300 mb-4">功能医学检测体系</p>
+            <p class="text-sm text-gray-500">不看疾病，只看"机能"</p>
+          </div>
+          <div class="space-y-4">
+            <p class="text-lg">✓ 精准锁定能量代谢缺口</p>
+            <p class="text-lg">✓ 精准锁定毒素沉积位置</p>
+            <p class="text-lg">✓ 精准锁定细胞损伤真因</p>
+            <p class="text-lg">✓ 数据驱动，不盲从与粉饰</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 5: 重构秩序 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-pink"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">重构秩序</h2>
+        <p class="text-amber-400 text-sm mb-6">Core Solution - Treatment</p>
+        
+        <div class="text-center mb-8">
+          <p class="text-3xl font-bold">个性化营养点滴</p>
+          <p class="text-xl text-gray-400 mt-2">+ NAD+ 细胞修复支持</p>
+        </div>
+        
+        <div class="space-y-4 text-left max-w-700 mx-auto">
+          <p class="text-lg">• 以 NAD+ 为核心的能量代谢支持</p>
+          <p class="text-lg">• 精准修复干涸细胞</p>
+          <p class="text-lg">• 完成医疗级的<span class="text-amber-400">系统重启</span></p>
+        </div>
+        
+        <p class="text-xl font-bold mt-8 text-amber-400">一针一定制，为生命温柔而有力地续航</p>
+      </div>
+    </div>
+    
+    <!-- Slide 6: 温润赋能 -->
+    <div class="slide">
+      <div class="light-spot light-spot-purple"></div>
+      <div class="light-spot light-spot-pink"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">温润赋能</h2>
+        <p class="text-pink-400 text-sm mb-6">Service Empathy</p>
+        
+        <p class="text-xl mb-6">将同理心转化为专业服务</p>
+        
+        <div class="text-left space-y-4 max-w-700 mx-auto">
+          <p class="text-lg">• 发挥<span class="text-pink-400">女性视角</span>，消解医疗的冰冷</p>
+          <p class="text-lg">• 私密舒适、润物无声的空间</p>
+          <p class="text-lg">• 唤醒身心<span class="text-pink-400">双重能量</span></p>
+        </div>
+        
+        <p class="text-gray-400 mt-8">旗舰店静谧私密空间 | 茧式护理间 | 温馨休息区</p>
+      </div>
+    </div>
+    
+    <!-- Slide 7: 生命哲学 -->
+    <div class="slide">
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-blue"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">生命哲学</h2>
+        <p class="text-amber-400 text-sm mb-6">坦然并存</p>
+        
+        <p class="text-3xl font-bold mb-8">一种松弛有度的生命态度</p>
+        
+        <div class="text-left space-y-4 max-w-700 mx-auto">
+          <p class="text-lg">• 理性看待时光，抚平过度焦虑</p>
+          <p class="text-lg">• 我们提供的是<span class="text-amber-400">"底气"</span></p>
+          <p class="text-lg">• 让你在时间的维度中，以最佳状态驾驭每一种身份</p>
+        </div>
+        
+        <p class="text-gray-400 mt-8">家庭 · 事业 · 独处 —— 松弛自信</p>
+      </div>
+    </div>
+    
+    <!-- Slide 8: 目标人群 -->
+    <div class="slide">
+      <div class="light-spot light-spot-purple"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">目标人群</h2>
+        <p class="text-amber-400 text-sm mb-6">Target Audience</p>
+        
+        <p class="text-xl mb-6">为追求长期生命质量的先锋准备</p>
+        
+        <div class="grid-2 gap-6">
+          <div class="bg-white/5 rounded-xl p-6">
+            <p class="text-amber-400 font-bold mb-4">人群特征</p>
+            <p class="text-gray-300">30-55岁</p>
+            <p class="text-gray-300">关注健康与精力管理</p>
+            <p class="text-gray-300">企业家 / 管理层</p>
+            <p class="text-gray-300">不仅要"美丽"，更要"生机"</p>
+          </div>
+          <div class="bg-white/5 rounded-xl p-6">
+            <p class="text-amber-400 font-bold mb-4">关键词</p>
+            <p class="text-gray-300">长期主义者</p>
+            <p class="text-gray-300">精英人群</p>
+            <p class="text-gray-300">高净值</p>
+            <p class="text-gray-300">状态管理人</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 9: 团队介绍 -->
+    <div class="slide">
+      <div class="light-spot light-spot-pink"></div>
+      <div class="light-spot light-spot-purple"></div>
+      <div class="slide-content">
+        <h2 class="text-2xl font-bold mb-2">团队介绍 & 延展服务</h2>
+        <p class="text-pink-400 text-sm mb-6">Team & Extensions</p>
+        
+        <div class="grid-2 gap-8">
+          <div>
+            <p class="text-2xl font-bold text-pink-400 mb-4">全女性创始团队</p>
+            <p class="text-gray-300">更懂生命与赋能</p>
+            <p class="text-gray-400 text-sm mt-4">核心团队合影</p>
+            <p class="text-gray-400 text-sm">展现专业严谨与女性同理心</p>
+          </div>
+          <div class="text-left space-y-4">
+            <p class="text-xl font-bold text-amber-400">延展服务</p>
+            <p class="text-gray-300">• 整合抗衰管理</p>
+            <p class="text-gray-300">• 高端健康管理</p>
+            <p class="text-gray-300">• 再生医学整合服务</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slide 10: 封底 -->
+    <div class="slide">
+      <div class="light-spot light-spot-purple"></div>
+      <div class="light-spot light-spot-gold"></div>
+      <div class="light-spot light-spot-pink"></div>
+      <div class="slide-content">
+        <h1 class="text-4xl font-black mb-6">TimeNova <span class="text-amber-400">时初之光</span></h1>
+        <p class="text-xl font-light text-gray-300 mb-8">诚邀各界，共襄"生命向初"盛举。</p>
+        <div class="text-gray-500 space-y-2">
+          <p>www.timenova.com</p>
+          <p>contact@timenova.com</p>
+          <p>[公司地址]</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="page-number" id="pageNumber">1 / 10</div>
+  
+  <button class="fullscreen-btn" onclick="toggleFullscreen()" title="全屏演示 (ESC退出)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+  </button>
+  
+  <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progressBar');
+    const pageNumber = document.getElementById('pageNumber');
+    let currentSlide = 0;
+    
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = `progress-dot ${index === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => goToSlide(index));
+      progressBar.appendChild(dot);
+    });
+    
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active', 'prev');
+        if (index === currentSlide) slide.classList.add('active');
+        else if (index < currentSlide) slide.classList.add('prev');
+      });
+      document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
+    function goToSlide(index) { currentSlide = index; updateSlides(); }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      else if (e.key === 'ArrowLeft') prevSlide();
+      else if (e.key === 'Escape' && document.fullscreenElement) document.exitFullscreen();
+    });
+    
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+    });
+  </script>
+</body>
+</html>
