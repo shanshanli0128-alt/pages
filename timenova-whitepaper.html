@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeNova 时初之光 品牌核心白皮书</title>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css" id="theme">
+  
+  <style>
+    :root {
+      --primary: #f59e0b;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --blue: #3b82f6;
+      --emerald: #10b981;
+    }
+    
+    .reveal { background: linear-gradient(135deg, #0a0a12 0%, #1a1025 50%, #0a0a12 100%); }
+    .reveal .slides section { text-align: left; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-weight: 900; }
+    .reveal h1 { font-size: 2.5em; }
+    .reveal h2 { font-size: 1.6em; margin-bottom: 0.5em; }
+    .reveal h3 { font-size: 1.2em; }
+    
+    .reveal .accent { color: var(--primary); }
+    .reveal .purple { color: var(--secondary); }
+    .reveal .pink { color: var(--accent); }
+    .reveal .blue { color: var(--blue); }
+    .reveal .emerald { color: var(--emerald); }
+    .reveal .gray { color: #9ca3af; }
+    .reveal .light { color: #e5e7eb; }
+    
+    .reveal .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #f59e0b, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .logo {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 0.7em;
+      color: rgba(255,255,255,0.3);
+      z-index: 100;
+    }
+    
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #7c3aed; top: -200px; right: -100px; animation: float1 20s ease-in-out infinite; }
+    .orb-2 { width: 400px; height: 400px; background: #f59e0b; bottom: -150px; left: -100px; animation: float2 25s ease-in-out infinite; }
+    .orb-3 { width: 300px; height: 300px; background: #ec4899; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: float3 15s ease-in-out infinite; }
+    
+    @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-50px, 50px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(50px, -30px); } }
+    @keyframes float3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.2); } }
+    
+    .reveal .fragment.fade-up { opacity: 0; transform: translateY(20px); }
+    .reveal .fragment.fade-up.visible { opacity: 1; transform: translateY(0); }
+    
+    .center-text { text-align: center !important; }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+  <div class="logo">TimeNova · 时初之光</div>
+  
+  <div class="reveal">
+    <div class="slides">
+      
+      <!-- Slide 1: 封面 -->
+      <section class="center-text" data-transition="zoom">
+        <h1 class="gradient-text">TimeNova</h1>
+        <h3>时初之光</h3>
+        <p class="gray" style="margin-top: 1em;">品牌核心白皮书</p>
+        <p class="accent" style="margin-top: 2em; font-size: 1.2em;">时间向前，生命向初。</p>
+      </section>
+      
+      <!-- Slide 2: 品牌概览 -->
+      <section>
+        <h2>一、品牌概览</h2>
+        <div class="card fragment fade-up">
+          <p><span class="accent">品牌名称：</span>TimeNova · 时初之光</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p><span class="accent">品牌口号：</span>时间向前，生命向初。</p>
+          <p class="gray" style="font-size: 0.8em;">Time moves forward, life returns to its origin.</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p><span class="accent">行业定位：</span>以功能医学为基础的生命状态管理平台</p>
+        </div>
+      </section>
+      
+      <!-- Slide 3: 品牌释义 -->
+      <section>
+        <h2>二、品牌释义</h2>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--primary);">
+          <h3 class="accent">TimeNova：时间中的新生与能量激活</h3>
+          <p class="gray">Time：时间 | Nova：新星、新生、爆发的能量</p>
+        </div>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--secondary);">
+          <h3 class="purple">时初之光：生命回归最佳状态时所呈现的光与力量</h3>
+          <p class="gray">时：时间 | 初：最初、本源 | 光：生命能量、希望</p>
+        </div>
+      </section>
+      
+      <!-- Slide 4: 品牌故事标题 -->
+      <section class="center-text" data-transition="convex">
+        <h2 class="gradient-text">三、品牌故事</h2>
+        <h3 class="light">时间之维的温柔觉醒</h3>
+      </section>
+      
+      <!-- Slide 5: 熵增理论 -->
+      <section>
+        <h3>熵增定律</h3>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--accent);">
+          <p>宇宙万物都难逃"熵增"——</p>
+          <p class="gray">随着时间推移，系统总是从有序走向无序，从充盈走向耗散。</p>
+        </div>
+        <p class="gray fragment fade-up" style="margin-top: 1em;">对于人体而言，疲惫、代谢减缓、机能衰退，本质上就是生命能量的"耗散"过程。</p>
+      </section>
+      
+      <!-- Slide 6: 痛点 -->
+      <section>
+        <h3>当代人的生命状态</h3>
+        <div class="card fragment fade-up">
+          <p>在追求长期生命质量的旅程中，当代人往往需要在多重社会角色中不断流转：</p>
+          <ul>
+            <li>运筹帷幄的决策者</li>
+            <li>各行各业不断探索的进取者</li>
+            <li>面对生活与事业期许的承担者</li>
+          </ul>
+        </div>
+        <p class="accent fragment fade-up" style="margin-top: 1em;">最令人疲惫的往往不是重任本身，而是能量被悄然抽离的耗散感。</p>
+      </section>
+      
+      <!-- Slide 7: 理念 -->
+      <section>
+        <h3>我们的信念</h3>
+        <div class="card fragment fade-up">
+          <p>真正的生命质量，<span class="accent">不应是</span>充满紧绷感的强行对抗。</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p>真正的强大，是让多重身份能够更坦然地并存，</p>
+          <p>是向内探寻，在细胞深处重建秩序。</p>
+        </div>
+      </section>
+      
+      <!-- Slide 8: TimeNova诞生 -->
+      <section>
+        <h2>TimeNova 诞生</h2>
+        <div class="card fragment fade-up">
+          <p class="accent">"TimeNova"，意为时间长河中爆发的新星。</p>
+          <p class="gray">在浩瀚宇宙里，新星（Nova）的诞生是能量的极致聚变；</p>
+          <p class="gray">在生命微观维度里，我们通过功能医学检测，精准锁定能量流失缺口。</p>
+        </div>
+      </section>
+      
+      <!-- Slide 9: 服务内容 -->
+      <section>
+        <h3>核心服务</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="card fragment fade-up" style="border-top: 4px solid var(--blue);">
+            <h4 class="blue">定制化营养点滴</h4>
+            <p class="gray">为干涸的细胞注入高维度的纯净能量</p>
+          </div>
+          <div class="card fragment fade-up" style="border-top: 4px solid var(--emerald);">
+            <h4 class="emerald">NAD+ 细胞修复</h4>
+            <p class="gray">完成精准的"负熵"干预</p>
+          </div>
+        </div>
+        <p class="accent fragment fade-up" style="margin-top: 1em; text-align: center;">这是医疗前沿科技赋予生命的系统级重启</p>
+      </section>
+      
+      <!-- Slide 10: 空间体验 -->
+      <section>
+        <h3>专属诊疗空间</h3>
+        <div class="card fragment fade-up">
+          <p>在 TimeNova 兼具医疗严密与温润质感的专属诊疗空间内，</p>
+          <p class="purple" style="font-size: 1.2em; margin: 1em 0;">尖端科技褪去了冰冷与尖锐。</p>
+          <p>它化作润物无声的液体光芒，</p>
+          <p>顺着静脉流淌，温柔而极具力量地缝合岁月的损耗。</p>
+        </div>
+      </section>
+      
+      <!-- Slide 11: 品牌寄语 -->
+      <section class="center-text" data-transition="zoom">
+        <span style="font-size: 4em; color: rgba(255,255,255,0.2);">"</span>
+        <p style="font-size: 1.3em; margin: 0.5em 0;">在时间的维度中，激发生命的新生力量。</p>
+        <p class="accent" style="font-size: 1.1em;">时间依旧从容向前，但你的生命状态，</p>
+        <p class="accent" style="font-size: 1.1em;">却能在光芒的牵引下，回到"时初"之境。</p>
+      </section>
+      
+      <!-- Slide 12: 愿景 -->
+      <section>
+        <h3 class="gray">愿景 Vision</h3>
+        <div class="card fragment fade-up">
+          <p style="font-size: 1.1em;">成为卓越的生命状态管理平台，</p>
+          <p class="accent" style="font-size: 1.3em;">让长期主义者始终拥有坦然绽放的底气。</p>
+        </div>
+      </section>
+      
+      <!-- Slide 13: 使命 -->
+      <section>
+        <h3 class="gray">使命 Mission</h3>
+        <div class="card fragment fade-up">
+          <p>以功能医学为基石，</p>
+          <p>通过精准的营养点滴与细胞修复科技，</p>
+          <p class="accent" style="font-size: 1.2em;">激发人体原生的新生力量，</p>
+          <p class="accent" style="font-size: 1.2em;">让生命绽放最美的光芒。</p>
+        </div>
+      </section>
+      
+      <!-- Slide 14: 价值观 -->
+      <section>
+        <h2>价值观 【生机四律】</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; font-size: 0.8em;">
+          <div class="card fragment fade-up">
+            <p class="blue" style="font-weight: bold;">精准溯源 Precision</p>
+            <p class="gray">坚守功能医学严谨性，以详实数据为准绳</p>
+          </div>
+          <div class="card fragment fade-up">
+            <p class="emerald" style="font-weight: bold;">重构秩序 Restoring Order</p>
+            <p class="gray">对抗"熵增"，从细胞层面系统性修复</p>
+          </div>
+          <div class="card fragment fade-up">
+            <p class="purple" style="font-weight: bold;">温润赋能 Gentle Empowerment</p>
+            <p class="gray">同理心转化为专业服务，消解医疗冰冷感</p>
+          </div>
+          <div class="card fragment fade-up">
+            <p class="accent" style="font-weight: bold;">坦然并存 Calm Coexistence</p>
+            <p class="gray">松弛有度，从容驾驭多重身份</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Slide 15: 目标人群 -->
+      <section>
+        <h2>五、目标人群与业务版图</h2>
+        <div class="card fragment fade-up">
+          <p class="accent" style="font-weight: bold;">目标人群画像</p>
+          <ul>
+            <li>高净值人群</li>
+            <li>30-55岁关注健康与状态管理人群</li>
+            <li>精英女性（企业家、企业管理层）</li>
+            <li>对"长期生命质量"有深刻认知与要求</li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Slide 16: 业务版图 -->
+      <section>
+        <h3>核心业务</h3>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--blue);">
+          <ul>
+            <li>功能医学检测与评估</li>
+            <li>个性化营养点滴方案</li>
+            <li>能量代谢与细胞修复支持（含NAD+）</li>
+          </ul>
+        </div>
+        <h3 style="margin-top: 1em;">延展服务</h3>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--purple);">
+          <ul>
+            <li>高端抗衰管理体系</li>
+            <li>定制化高端健康管理</li>
+            <li>再生医学整合服务</li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Slide 17: 结尾 -->
+      <section class="center-text" data-transition="zoom">
+        <h1 class="gradient-text">TimeNova</h1>
+        <h3>时初之光</h3>
+        <p class="gray" style="margin-top: 2em;">时间向前，生命向初。</p>
+      </section>
+      
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'zoom',
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+      width: 1200,
+      height: 675,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0,
+      controls: true,
+      progress: true,
+      center: false,
+    });
+  </script>
+</body>
+</html>
