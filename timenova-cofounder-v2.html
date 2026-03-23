@@ -29,6 +29,8 @@
     .progress-dot.active { background: #fff; transform: scale(1.3); }
     .progress-dot:hover { background: rgba(255,255,255,0.6); }
     .page-number { position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%); font-size: 0.875rem; color: rgba(255,255,255,0.4); z-index: 100; }
+    .fullscreen-btn { position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: rgba(255,255,255,0.6); cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .fullscreen-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
     .list-item { text-align: left; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
     .list-item:last-child { border-bottom: none; }
     .tag { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.7rem; margin: 0.15rem; }
@@ -352,7 +354,19 @@
   <div class="progress-bar" id="progressBar"></div>
   <div class="page-number" id="pageNumber">1 / 16</div>
   
+  <button class="fullscreen-btn" onclick="toggleFullscreen()" title="全屏演示 (ESC退出)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+  </button>
+  
   <script>
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
     const slides = document.querySelectorAll('.slide');
     const progressBar = document.getElementById('progressBar');
     const pageNumber = document.getElementById('pageNumber');
@@ -384,6 +398,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
       else if (e.key === 'ArrowLeft') prevSlide();
+      else if (e.key === 'Escape' && document.fullscreenElement) document.exitFullscreen();
     });
     
     let touchStartX = 0;
