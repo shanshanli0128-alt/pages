@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时初之光 TimeNova 创始人 IP 打造思路</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css">
+  <style>
+    :root { --primary: #f59e0b; --secondary: #8b5cf6; --accent: #ec4899; --blue: #3b82f6; --emerald: #10b981; }
+    .reveal { background: linear-gradient(135deg, #0a0a12 0%, #1a1025 50%, #0a0a12 100%); }
+    .reveal .slides section { text-align: left; font-size: 0.85em; }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 { text-transform: none; font-weight: 900; }
+    .reveal h1 { font-size: 2.2em; }
+    .reveal h2 { font-size: 1.4em; margin-bottom: 0.4em; }
+    .reveal h3 { font-size: 1.1em; }
+    .reveal h4 { font-size: 0.9em; }
+    .accent { color: var(--primary); }
+    .purple { color: var(--secondary); }
+    .pink { color: var(--accent); }
+    .blue { color: var(--blue); }
+    .emerald { color: var(--emerald); }
+    .gray { color: #9ca3af; }
+    .light { color: #e5e7eb; }
+    .reveal ul { margin-left: 0; list-style: none; }
+    .reveal ul li { padding: 0.2rem 0; font-size: 0.8em; }
+    .reveal ul li::before { content: "▸"; color: var(--primary); margin-right: 0.4em; }
+    .card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; margin: 0.4rem 0; border: 1px solid rgba(255,255,255,0.1); }
+    .reveal table { font-size: 0.55em; width: 100%; border-collapse: collapse; }
+    .reveal th, .reveal td { padding: 0.5rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .reveal th { color: var(--primary); font-weight: bold; }
+    .gradient-text { background: linear-gradient(135deg, #f59e0b, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo { position: fixed; top: 15px; right: 15px; font-size: 0.65em; color: rgba(255,255,255,0.3); z-index: 100; }
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(100px); opacity: 0.2; pointer-events: none; z-index: -1; }
+    .orb-1 { width: 450px; height: 450px; background: #7c3aed; top: -180px; right: -80px; animation: float1 20s ease-in-out infinite; }
+    .orb-2 { width: 380px; height: 380px; background: #f59e0b; bottom: -120px; left: -80px; animation: float2 25s ease-in-out infinite; }
+    .orb-3 { width: 280px; height: 280px; background: #ec4899; top: 45%; left: 45%; transform: translate(-50%, -50%); animation: float3 15s ease-in-out infinite; }
+    @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-40px, 40px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(40px, -25px); } }
+    @keyframes float3 { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.15); } }
+    .reveal .fragment.fade-up { opacity: 0; transform: translateY(15px); }
+    .reveal .fragment.fade-up.visible { opacity: 1; transform: translateY(0); }
+    .center-text { text-align: center !important; }
+    .small-text { font-size: 0.7em !important; }
+    .quote { border-left: 3px solid var(--primary); padding-left: 1rem; font-style: italic; color: #9ca3af; font-size: 0.75em; }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+  <div class="logo">TimeNova · 时初之光</div>
+  <div class="reveal">
+    <div class="slides">
+      
+      <!-- Slide 1: 封面 -->
+      <section class="center-text" data-transition="zoom">
+        <h1 class="gradient-text">TimeNova</h1>
+        <h3>时初之光</h3>
+        <p class="gray" style="margin-top: 0.8em;">创始人 IP 打造思路</p>
+        <p class="accent" style="margin-top: 1.5em;">冰总 × Melody × 响妈 × 潘潘姐</p>
+      </section>
+      
+      <!-- Slide 2: 品牌定位 -->
+      <section>
+        <h2>品牌定位</h2>
+        <div class="card fragment fade-up">
+          <p class="light" style="font-size: 1em;">功能医学 · 细胞级抗衰 · 高净值生命质量管家</p>
+        </div>
+        <div class="card fragment fade-up" style="margin-top: 0.5rem;">
+          <p class="accent">创始人矩阵：</p>
+          <p class="gray">冰总（创始人）+ Melody · 响妈 · 潘潘姐（联合创始人）</p>
+        </div>
+      </section>
+      
+      <!-- Slide 3: 创始人矩阵 -->
+      <section>
+        <h2>一、品牌创始人矩阵概览</h2>
+        <table class="fragment fade-up">
+          <thead><tr><th>创始人</th><th>核心定位</th><th>核心气质</th><th>出镜</th><th>平台</th></tr></thead>
+          <tbody>
+            <tr><td class="accent">冰总</td><td>不露脸"逆龄推手"</td><td class="gray">Ins风美学</td><td>不露脸</td><td class="gray">小红书+视频号</td></tr>
+            <tr><td class="blue">Melody</td><td>生命质量架构师</td><td class="gray">高能并存</td><td>全面出镜</td><td class="gray">视频号</td></tr>
+            <tr><td class="purple">响妈</td><td>健康搭子</td><td class="gray">温柔坚定</td><td>全面出镜</td><td class="gray">小红书</td></tr>
+            <tr><td class="pink">潘潘姐</td><td>生命管家</td><td class="gray">E人反差</td><td>全面出镜</td><td class="gray">短视频</td></tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <!-- Slide 4: 四大创始人对比 -->
+      <section>
+        <h2>二、四大创始人对比总结</h2>
+        <table class="fragment fade-up">
+          <thead><tr><th>维度</th><th>冰总</th><th>Melody</th><th>响妈</th><th>潘潘姐</th></tr></thead>
+          <tbody>
+            <tr><td>出镜</td><td class="gray">不露脸</td><td class="gray">全面出镜</td><td class="gray">全面出镜</td><td class="gray">全面出镜</td></tr>
+            <tr><td>气质</td><td class="accent">智性贵妇</td><td class="blue">高能并存</td><td class="purple">温柔坚定</td><td class="pink">E人反差</td></tr>
+            <tr><td>风格</td><td class="gray">氛围感</td><td class="gray">干练口播</td><td class="gray">闺蜜聊天</td><td class="gray">搞笑反差</td></tr>
+            <tr><td>记忆点</td><td class="accent">时间不是敌手</td><td class="blue">不做选择</td><td class="purple">爱自己</td><td class="pink">保单在手</td></tr>
+          </tbody>
+        </table>
+        <p class="accent fragment fade-up" style="margin-top: 0.5rem; font-size: 0.75em;">用自己活生生的结果，为产品代言。这是 IP 最强的护城河。</p>
+      </section>
+      
+      <!-- Slide 5: 冰总人设 -->
+      <section>
+        <h2>三、冰总 IP 打造方案</h2>
+        <h3 class="accent">高净值 · 不露脸 · 强氛围</h3>
+        <div class="card fragment fade-up">
+          <p><span class="accent">身份：</span>时初之光创始人，长寿诊所投资人</p>
+          <p><span class="accent">气质：</span>智性贵妇、高阶审美家、不老极客</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="accent">核心标签：</p>
+          <ul><li>#逆龄推手</li><li>#隐世贵妇</li><li>#Ins风美学博主</li><li>#细节控</li></ul>
+        </div>
+      </section>
+      
+      <!-- Slide 6: 冰总视觉 -->
+      <section>
+        <h3>冰总 · 核心视觉逻辑</h3>
+        <div class="card fragment fade-up">
+          <p class="accent">从"看脸"转向"看场"</p>
+          <p class="gray">色调：Ins风米灰、奶白，或电影感冷色调</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="accent">五大核心机位：</p>
+          <ul><li>POV 第一人称</li><li>手部特写</li><li>动态背影</li><li>氛围空镜</li><li>侧后方工作态</li></ul>
+        </div>
+      </section>
+      
+      <!-- Slide 7: 冰总内容系列 -->
+      <section>
+        <h3>冰总 · 三大内容系列</h3>
+        <div class="card fragment fade-up" style="border-left: 3px solid var(--primary);">
+          <p class="accent">《贵妇的抗衰晨间清单》</p>
+          <p class="gray small-text">建立"长寿/抗衰"专家形象</p>
+        </div>
+        <div class="card fragment fade-up" style="border-left: 3px solid var(--secondary);">
+          <p class="purple">《创始人的一天：不只有美》</p>
+          <p class="gray small-text">强化"事业女性/投资人"身份</p>
+        </div>
+        <div class="card fragment fade-up" style="border-left: 3px solid var(--accent);">
+          <p class="pink">《冰总的审美私藏》《手部美学课堂》</p>
+          <p class="gray small-text">提升品牌调性、种草产品</p>
+        </div>
+      </section>
+      
+      <!-- Slide 8: 冰总文案 -->
+      <section>
+        <h3>冰总 · 质感文案参考</h3>
+        <div class="quote fragment fade-up">
+          <p>"很多人问我，为什么投资长寿医学？其实，我不是在和时间赛跑，而是在和时间握手言和。创立'时初之光'，是因为我见过太多枯萎的优雅。我想留住的，不是一张永远二十岁的脸，而是那种'即便历经万千，眼里依然有初见之光'的气度。美，是自律的勋章；而科技，是给这枚勋章镀上的永恒。"</p>
+        </div>
+        <div class="quote fragment fade-up" style="margin-top: 0.5rem;">
+          <p>"外表的柔软是给世界的温柔，骨子里的清醒，才是支撑这份温柔的底气。"</p>
+        </div>
+      </section>
+      
+      <!-- Slide 9: Melody人设 -->
+      <section>
+        <h2>四、Melody IP 打造方案</h2>
+        <h3 class="blue">高能并存 · 极度坦然</h3>
+        <div class="card fragment fade-up">
+          <p><span class="blue">核心定位：</span>高净值人群的"生命质量架构师"</p>
+          <p class="gray">财富管理 + 功能医学 + 先锋教育 = 抗风险与长期增值闭环</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="accent">多维身份：</p>
+          <ul><li>左手家办 / 右手大健康</li><li>44岁高能二胎母亲</li><li>精锐金融团队长</li></ul>
+        </div>
+      </section>
+      
+      <!-- Slide 10: Melody内容 -->
+      <section>
+        <h3>Melody · 三大内容专栏</h3>
+        <div class="card fragment fade-up">
+          <p class="blue">《顶配人生的双核驱动》</p>
+          <p class="gray small-text">商业与大健康的交融，同一批高净值客户的真实洞察</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="blue">《高能女性的"后台"管理》</p>
+          <p class="gray small-text">营养干预、荷尔蒙管理、睡眠监测数据</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="blue">《先锋视角的家庭合伙人》</p>
+          <p class="gray small-text">松弛感和独特的家庭生态</p>
+        </div>
+      </section>
+      
+      <!-- Slide 11: Melody漏斗 -->
+      <section>
+        <h3>Melody · 内容漏斗模型</h3>
+        <div style="display: flex; gap: 0.4rem; font-size: 0.75em;">
+          <div class="card fragment fade-up" style="flex:1; border-top: 3px solid var(--blue);">
+            <p class="blue" style="font-weight:bold;">引流层 30%</p>
+            <p class="gray">时间折叠术</p>
+            <p class="gray">教育理念反差</p>
+          </div>
+          <div class="card fragment fade-up" style="flex:1; border-top: 3px solid var(--secondary);">
+            <p class="purple" style="font-weight:bold;">信任层 50%</p>
+            <p class="gray">金融逻辑</p>
+            <p class="gray">功能医学数据</p>
+          </div>
+          <div class="card fragment fade-up" style="flex:1; border-top: 3px solid var(--emerald);">
+            <p class="emerald" style="font-weight:bold;">转化层 20%</p>
+            <p class="gray">事业机会</p>
+            <p class="gray">合伙人招募</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Slide 12: Melody TVC -->
+      <section>
+        <h3>Melody · 置顶 TVC 脚本</h3>
+        <div class="quote fragment fade-up">
+          <p>"44岁高龄生二胎，同时管理金融团队，家有青春期儿子。很多人问我怎么做到不崩溃的？</p>
+          <p style="margin-top:0.5rem;">答案是：我不靠硬扛，我靠精准的系统设计和极致的生命能量管理。</p>
+          <p style="margin-top:0.5rem;">我创立了'时初之光'，不谈表面的皮相抗衰，只关注如何从细胞层面，重塑精力和能量。</p>
+          <p style="margin-top:0.5rem;">44岁，我不做选择，我依然在做人生的加法。"</p>
+        </div>
+      </section>
+      
+      <!-- Slide 13: 响妈人设 -->
+      <section>
+        <h2>五、响妈 IP 打造方案</h2>
+        <h3 class="purple">温柔坚定 · 健康搭子</h3>
+        <div class="card fragment fade-up">
+          <p><span class="purple">Slogan：</span>关照身体，滋养灵魂，爱自己什么时候都不晚。</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="accent">人设标签：</p>
+          <ul><li>内核稳定的淡人</li><li>功能医学实践者</li><li>拒绝内耗的创业妈妈</li><li>初中少年的"战友型"妈妈</li></ul>
+        </div>
+      </section>
+      
+      <!-- Slide 14: 响妈内容 -->
+      <section>
+        <h3>响妈 · 四大内容专栏</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; font-size: 0.75em;">
+          <div class="card fragment fade-up">
+            <p class="purple" style="font-weight:bold;">逻辑说健康</p>
+            <p class="gray">拆解功能医学，只讲原理不卖货</p>
+          </div>
+          <div class="card fragment fade-up">
+            <p class="purple" style="font-weight:bold;">淡人的创业史</p>
+            <p class="gray">柔性管理团队、创业故事</p>
+          </div>
+          <div class="card fragment fade-up">
+            <p class="purple" style="font-weight:bold;">爱的仪式感</p>
+            <p class="gray">营养早餐、亲子互动</p>
+          </div>
+          <div class="card fragment fade-up">
+            <p class="purple" style="font-weight:bold;">心灵滋养清单</p>
+            <p class="gray">推书、电影、呼吸法</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Slide 15: 潘潘姐人设 -->
+      <section>
+        <h2>六、潘潘姐 IP 打造方案</h2>
+        <h3 class="pink">E人反差 · 生命管家</h3>
+        <div class="card fragment fade-up">
+          <p><span class="pink">核心标签：</span>全能"生命管家" · 最怕客户走得早的"操心姐"</p>
+          <p class="gray">大大大E人、嘴毒心软、行动派、科技尝鲜者</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p class="accent">Slogan：</p>
+          <p>"不仅让你赔得起，更要让你活得久。"</p>
+          <p>"保单在手，长命百岁。"</p>
+        </div>
+      </section>
+      
+      <!-- Slide 16: 潘潘姐内容 -->
+      <section>
+        <h3>潘潘姐 · 三大内容赛道</h3>
+        <div class="card fragment fade-up" style="border-left: 3px solid var(--pink);">
+          <p class="pink" style="font-weight:bold;">专业反差类</p>
+          <p class="gray small-text">职业装+白大褂，"保险保你的钱，我保你的命"</p>
+        </div>
+        <div class="card fragment fade-up" style="border-left: 3px solid var(--blue);">
+          <p class="blue" style="font-weight:bold;">科技开箱类</p>
+          <p class="gray small-text">高压氧舱、NAD+实测，拆解智商税</p>
+        </div>
+        <div class="card fragment fade-up" style="border-left: 3px solid var(--emerald);">
+          <p class="emerald" style="font-weight:bold;">不内耗的中年类</p>
+          <p class="gray small-text">"中年人的最高级自律，就是不内耗、多赚钱、活得久"</p>
+        </div>
+      </section>
+      
+      <!-- Slide 17: 潘潘姐避坑 -->
+      <section>
+        <h3>潘潘姐 · 三大避坑建议</h3>
+        <div class="card fragment fade-up">
+          <p><span class="accent">1. 分清主次：</span>搞笑放在生活点滴，讲产品回归专业</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p><span class="accent">2. 合规性：</span>专业词汇避雷，多讲"感受"少讲"疗效"</p>
+        </div>
+        <div class="card fragment fade-up">
+          <p><span class="accent">3. 弱化销售感：</span>以"帮客户避坑"和"帮客户长寿"为出发点</p>
+        </div>
+      </section>
+      
+      <!-- Slide 18: 冷启动 -->
+      <section>
+        <h2>七、冷启动节奏</h2>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--primary);">
+          <p><span class="accent">Week 1-2：</span>发布置顶 TVC《44岁，我依然在做人生的加法》</p>
+          <p class="gray small-text">完成原始身份定调</p>
+        </div>
+        <div class="card fragment fade-up" style="border-left: 4px solid var(--blue);">
+          <p><span class="blue">Week 3-4：</span>每周2-3更</p>
+          <p class="gray small-text">深度口播 + Vlog 纪实交叉</p>
+        </div>
+      </section>
+      
+      <!-- Slide 12选题 -->
+      <section>
+        <h2>八、首月12个爆款选题</h2>
+        <table class="fragment fade-up" style="font-size: 0.5em;">
+          <thead><tr><th>周</th><th>选题</th><th>核心逻辑</th></tr></thead>
+          <tbody>
+            <tr><td>Week1</td><td>《44岁，我依然在做人生的加法》</td><td class="gray">完成原始身份定调</td></tr>
+            <tr><td>Week1</td><td>《拒绝教育内卷...送进夏山学校》</td><td class="gray">长期主义谈教育</td></tr>
+            <tr><td>Week1</td><td>《用写保险基本法的严谨...》</td><td class="gray">展现商业顶层设计</td></tr>
+            <tr><td>Week2</td><td>《家办客户的秘密：越是有钱人...》</td><td class="gray">揭秘高净值圈层</td></tr>
+            <tr><td>Week2</td><td>《44岁高龄产妇的自救...》</td><td class="gray">甩真实数据</td></tr>
+            <tr><td>Week2</td><td>【Vlog】《时间折叠术》</td><td class="gray">视觉化真实</td></tr>
+            <tr><td>Week3</td><td>《不管是做抗衰还是做教育...》</td><td class="gray">哲学层面统一</td></tr>
+            <tr><td>Week3</td><td>《女高管的包里装了什么？》</td><td class="gray">轻松开箱种草</td></tr>
+            <tr><td>Week3</td><td>《我不相信工作与生活平衡...》</td><td class="gray">拆解时间管理</td></tr>
+            <tr><td>Week4</td><td>《40岁以后...雌雄同体的决策力》</td><td class="gray">小红书共鸣</td></tr>
+            <tr><td>Week4</td><td>《从金融圈到大健康...合伙人》</td><td class="gray">隐性招商</td></tr>
+            <tr><td>Week4</td><td>《坦白局：搞砸了的一天》</td><td class="gray">降神坛真实</td></tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <!-- Slide 结尾 -->
+      <section class="center-text" data-transition="zoom">
+        <h1 class="gradient-text">TimeNova</h1>
+        <h3>时初之光</h3>
+        <p class="gray" style="margin-top: 1.5em;">活成最好的代言人</p>
+        <p class="accent" style="margin-top: 1em;">时间向前，生命向初。</p>
+      </section>
+      
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'zoom',
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+      width: 1200, height: 675, margin: 0.04, minScale: 0.2, maxScale: 2.0,
+      controls: true, progress: true, center: false,
+    });
+  </script>
+</body>
+</html>
