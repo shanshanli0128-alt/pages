@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeNova 时初之光 — 创始合伙人招募白皮书</title>
+
+  <!-- 字体：思源宋体 + 霞鹜文楷（书卷气）+ 苹方衬线备选 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Serif+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       基础重置 & 纸张质感背景
+       ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Serif SC', 'PingFang SC', 'Source Han Serif CN', 'SimSun', serif;
+      background: #F5F0E8;
+      color: #2C1810;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* 米白纸张纹理背景 */
+    .slides-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        /* 纸张纤维纹理 */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+        linear-gradient(160deg, #FAF7F2 0%, #F0EBE0 40%, #EDE6D8 100%);
+    }
+
+    /* ============================================
+       幻灯片基础 — 横向 A4 比例 (841:595 ≈ 1.41)
+       ============================================ */
+    .slide {
+      width: 100%;
+      height: 100%;
+      max-width: 1100px;
+      max-height: 780px;
+      aspect-ratio: 1100 / 780;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(60px);
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      overflow: hidden;
+      background: linear-gradient(175deg, #FDFAF5 0%, #F7F2EA 50%, #F2EDE2 100%);
+      box-shadow: 0 4px 40px rgba(60, 30, 10, 0.08), 0 1px 3px rgba(60, 30, 10, 0.05);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .slide.prev {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    /* ============================================
+       书卷气装饰元素
+       ============================================ */
+
+    /* 顶部细线装饰 */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #C4A882, transparent);
+    }
+
+    /* 底部细线装饰 */
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #D4C4A8, transparent);
+    }
+
+    /* 内容层 */
+    .slide-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 88%;
+      max-width: 900px;
+      padding: 2rem 2.5rem;
+    }
+
+    /* 装饰性引号 */
+    .deco-quote-left {
+      font-family: 'Noto Serif Display', 'Noto Serif SC', serif;
+      font-size: 6rem;
+      line-height: 1;
+      color: #D4C4A8;
+      position: absolute;
+      top: 0.5rem;
+      left: 1.5rem;
+      user-select: none;
+      opacity: 0.6;
+    }
+    .deco-quote-right {
+      font-family: 'Noto Serif Display', 'Noto Serif SC', serif;
+      font-size: 6rem;
+      line-height: 1;
+      color: #D4C4A8;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 1.5rem;
+      user-select: none;
+      opacity: 0.6;
+    }
+
+    /* ============================================
+       进度条 & 页码
+       ============================================ */
+    .progress-bar {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      z-index: 200;
+    }
+    .progress-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #C4A882;
+      cursor: pointer;
+      transition: all 0.3s;
+      opacity: 0.4;
+    }
+    .progress-dot.active {
+      background: #8B5E3C;
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    .progress-dot:hover { opacity: 0.8; }
+
+    .page-number {
+      position: fixed;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.75rem;
+      color: #B8A080;
+      letter-spacing: 0.1em;
+      z-index: 200;
+    }
+
+    /* ============================================
+       文字样式
+       ============================================ */
+    .title-main {
+      font-family: 'Noto Serif SC', 'PingFang SC', serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      color: #1A0F08;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      margin-bottom: 0.6em;
+    }
+
+    .title-sub {
+      font-family: 'Noto Serif SC', 'PingFang SC', serif;
+      font-weight: 400;
+      font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+      color: #7A5C3A;
+      letter-spacing: 0.15em;
+      line-height: 1.8;
+    }
+
+    .section-tag {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: #A08060;
+      text-transform: uppercase;
+      margin-bottom: 1.2em;
+      opacity: 0.8;
+    }
+
+    .body-text {
+      font-family: 'Noto Serif SC', 'PingFang SC', serif;
+      font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+      font-weight: 400;
+      color: #3D2B1F;
+      line-height: 2;
+      letter-spacing: 0.04em;
+    }
+
+    .emphasis-text {
+      font-family: 'Noto Serif SC', 'PingFang SC', serif;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 600;
+      color: #2C1810;
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+    }
+
+    .slogan-text {
+      font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      color: #8B5E3C;
+      letter-spacing: 0.2em;
+      line-height: 1.8;
+    }
+
+    .quote-text {
+      font-family: 'Noto Serif Display', 'Noto Serif SC', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+      color: #5C3D2E;
+      line-height: 2;
+      letter-spacing: 0.03em;
+    }
+
+    .divider-line {
+      width: 3em;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C4A882, transparent);
+      margin: 1.2em auto;
+    }
+
+    .tag-label {
+      display: inline-block;
+      font-size: clamp(0.6rem, 1vw, 0.75rem);
+      letter-spacing: 0.15em;
+      color: #A08060;
+      border: 1px solid #D4C4A8;
+      padding: 0.2em 0.8em;
+      border-radius: 2px;
+      margin: 0.2em;
+      opacity: 0.8;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #F7F0E3, #EDE6D5);
+      border-left: 3px solid #C4A882;
+      border-right: 3px solid #C4A882;
+      padding: 1.2em 1.8em;
+      margin: 1em 0;
+      border-radius: 2px;
+    }
+
+    .stat-number {
+      font-family: 'Noto Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: #8B5E3C;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+      color: #8B7355;
+      letter-spacing: 0.1em;
+      margin-top: 0.4em;
+    }
+
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      flex-wrap: wrap;
+      margin: 1em 0;
+    }
+
+    .flow-node {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+      background: #F7F0E3;
+      border: 1px solid #D4C4A8;
+      padding: 0.5em 1em;
+      border-radius: 2px;
+      color: #3D2B1F;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .flow-arrow {
+      font-size: 1.2em;
+      color: #C4A882;
+    }
+
+    /* 列表 */
+    .content-list {
+      list-style: none;
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .content-list li {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.75rem, 1.4vw, 1rem);
+      color: #3D2B1F;
+      line-height: 2.2;
+      padding-left: 1.2em;
+      position: relative;
+      letter-spacing: 0.03em;
+    }
+
+    .content-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #C4A882;
+      font-size: 1.4em;
+      line-height: 1.6;
+    }
+
+    .number-list {
+      list-style: none;
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+      counter-reset: item;
+    }
+
+    .number-list li {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.75rem, 1.4vw, 1rem);
+      color: #3D2B1F;
+      line-height: 2.2;
+      padding-left: 2em;
+      position: relative;
+      letter-spacing: 0.02em;
+    }
+
+    .number-list li::before {
+      counter-increment: item;
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      color: #C4A882;
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+
+    /* ============================================
+       键盘 & 触摸
+       ============================================ */
+    @media (max-width: 768px) {
+      .slide {
+        max-width: 100vw;
+        max-height: 100vh;
+        aspect-ratio: unset;
+        width: 100vw;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slides-container" id="slidesContainer">
+
+  <!-- ========== SLIDE 1: 封面 ========== -->
+  <div class="slide active" id="slide-1">
+    <div class="slide-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;">
+      <p class="section-tag" style="margin-bottom:2em;">创始合伙人招募白皮书</p>
+      <h1 class="title-main" style="font-size:clamp(2rem,4.5vw,3.8rem);letter-spacing:0.15em;margin-bottom:0.4em;">时初之光</h1>
+      <p class="slogan-text" style="margin-bottom:1.5em;">时间向前 &nbsp;·&nbsp; 生命向初</p>
+      <div class="divider-line" style="width:8em;margin:1.5em auto;"></div>
+      <p class="title-sub" style="letter-spacing:0.25em;font-size:clamp(0.75rem,1.4vw,1rem);">开门红 / 招商路演专用版</p>
+      <p class="body-text" style="margin-top:2em;font-size:clamp(0.65rem,1.1vw,0.8rem);opacity:0.6;letter-spacing:0.2em;">TIMENOVO · 2025</p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 2: 痛点与觉醒 ========== -->
+  <div class="slide" id="slide-2">
+    <span class="deco-quote-left">"</span>
+    <span class="deco-quote-right">"</span>
+    <div class="slide-content">
+      <p class="section-tag">PART 1 · 时代风口</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.8em;">生命觉醒<br>摒弃传统焦虑</h2>
+      <div class="divider-line"></div>
+      <div class="highlight-box">
+        <p class="emphasis-text" style="font-size:clamp(1rem,1.9vw,1.4rem);">真正的衰老，<br>不是眼角的皱纹，<br>而是断崖式的精力损耗</p>
+      </div>
+      <div class="divider-line"></div>
+      <p class="body-text" style="text-align:left;max-width:680px;margin:0 auto;">
+        传统的体检只"查"不"管"<br>
+        传统的医美只粉饰表象<br><br>
+        TimeNova 带来的是一场向内探寻的<br>
+        <span style="color:#8B5E3C;font-weight:600;">"生命质量觉醒"</span><br>
+        我们做的是高维度的
+        <span style="color:#8B5E3C;font-weight:600;">"健康资产管理"</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 3: 精准核销 ========== -->
+  <div class="slide" id="slide-3">
+    <div class="slide-content">
+      <p class="section-tag">PART 2 · 科技交付</p>
+      <h2 class="title-main" style="font-size:clamp(1.5rem,3.2vw,2.6rem);margin-bottom:0.6em;">拒绝盲盒<br>精准核销</h2>
+      <div class="divider-line"></div>
+      <div class="highlight-box">
+        <p class="body-text" style="font-size:clamp(0.8rem,1.5vw,1.05rem);text-align:center;">
+          全维生命密码检测 &nbsp;价值数万元
+        </p>
+        <div class="divider-line" style="margin:0.8em auto;"></div>
+        <ul class="content-list" style="margin:0;">
+          <li>端粒长度检测</li>
+          <li>基因甲基化分析</li>
+          <li>肠道微生态全景测序</li>
+        </ul>
+      </div>
+      <div class="divider-line"></div>
+      <p class="quote-text" style="font-size:clamp(0.75rem,1.4vw,1rem);">
+        "在 TimeNova，一切干预都基于详实的数据。<br>精准检测，是我们服务交付的第一步。"
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 4: 靶向干预 ========== -->
+  <div class="slide" id="slide-4">
+    <div class="slide-content">
+      <p class="section-tag">PART 2 · 科技交付</p>
+      <h2 class="title-main" style="font-size:clamp(1.5rem,3.2vw,2.6rem);margin-bottom:0.6em;">靶向干预<br>液态光引擎</h2>
+      <div class="divider-line"></div>
+      <div class="highlight-box">
+        <ul class="number-list">
+          <li>定制化高纯度 NAD+ 营养点滴</li>
+          <li>权威专家团队保驾护航</li>
+          <li>专属口服干预包</li>
+        </ul>
+      </div>
+      <div class="divider-line"></div>
+      <p class="quote-text">
+        "这不是普通的保养，这是由权威医疗专家团队直接为细胞线粒体注入高维度的纯粹能量，重塑如初生般的光芒。"
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 5: 创始节点特权 ========== -->
+  <div class="slide" id="slide-5">
+    <div class="slide-content">
+      <p class="section-tag">PART 3 · 财富破局</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.5em;">创始节点特权</h2>
+      <p class="title-sub" style="letter-spacing:0.2em;margin-bottom:1em;">首批限 100 席</p>
+      <div class="divider-line"></div>
+      <div style="display:flex;justify-content:center;gap:2em;flex-wrap:wrap;margin:1em 0;">
+        <div style="text-align:center;">
+          <p class="stat-number">¥39,800</p>
+          <p class="stat-label">创始服务包认购价</p>
+        </div>
+        <div style="text-align:center;">
+          <p class="stat-number" style="color:#2C1810;">28%</p>
+          <p class="stat-label">即时销售佣金回赠</p>
+        </div>
+        <div style="text-align:center;">
+          <p class="stat-number" style="color:#2C1810;">¥11,144</p>
+          <p class="stat-label">首单佣金金额</p>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+      <p class="body-text" style="font-size:clamp(0.65rem,1.1vw,0.8rem);opacity:0.7;">
+        注：按实际核销进度发放，保障真实体验
+      </p>
+      <p class="body-text" style="margin-top:0.8em;font-size:clamp(0.75rem,1.3vw,0.95rem);">
+        认购即视作首单个人业绩，直通 V2 合伙人资格
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 6: 1分享6 ========== -->
+  <div class="slide" id="slide-6">
+    <div class="slide-content">
+      <p class="section-tag">PART 3 · 财富破局</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.5em;">"1 分享 6"<br>零成本破局</h2>
+      <div class="divider-line"></div>
+      <div class="flow-diagram" style="margin:1.2em 0;">
+        <div class="flow-node">你入局认购</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">分享给 6 位同频圈层好友</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">好友完成核销</div>
+      </div>
+      <div class="highlight-box" style="margin:1em 0;">
+        <p class="body-text" style="text-align:center;">
+          获得 <span style="color:#8B5E3C;font-weight:700;font-size:1.2em;">12% 专属津贴</span> 与推荐收益<br>
+          全额收回净投入
+        </p>
+      </div>
+      <p class="emphasis-text" style="font-size:clamp(0.95rem,1.8vw,1.3rem);text-align:center;margin-top:0.8em;">
+        仅需分享 6 人 · 不仅免费享受顶级抗衰服务<br>生意更实现净赚
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 7: 极速突围 ========== -->
+  <div class="slide" id="slide-7">
+    <div class="slide-content">
+      <p class="section-tag">PART 4 · 登顶蓝图</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.5em;">开门红专项晋升通道</h2>
+      <p class="title-sub" style="letter-spacing:0.15em;margin-bottom:1em;">首批 100 人专项 · 极速突围</p>
+      <div class="divider-line"></div>
+      <div style="display:flex;justify-content:center;gap:2.5em;flex-wrap:wrap;margin:1em 0;">
+        <div style="text-align:center;">
+          <p style="font-family:'Noto Serif SC';font-size:clamp(0.7rem,1.3vw,0.9rem);color:#7A5C3A;margin-bottom:0.5em;">1 带 6</p>
+          <p class="stat-number" style="font-size:clamp(1.6rem,3vw,2.5rem);">直升 V3</p>
+          <p class="stat-label">事业合伙人</p>
+        </div>
+        <div style="font-size:2em;color:#D4C4A8;align-self:center;">→</div>
+        <div style="text-align:center;">
+          <p style="font-family:'Noto Serif SC';font-size:clamp(0.7rem,1.3vw,0.9rem);color:#7A5C3A;margin-bottom:0.5em;">6 带 3</p>
+          <p class="stat-number" style="font-size:clamp(1.6rem,3vw,2.5rem);">登顶 V4</p>
+          <p class="stat-label">城市合伙人</p>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+      <div class="highlight-box" style="border-left-color:#B87050;border-right-color:#B87050;background:#FDF5F0;">
+        <p class="body-text" style="font-size:clamp(0.7rem,1.2vw,0.9rem);text-align:center;color:#5C3D2E;">
+          所有晋升考核，均以服务在机构内<br>"实际完成核销"为准<br>
+          我们只要真实的圈层体验，不要虚假泡沫
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 8: 三代裂变 ========== -->
+  <div class="slide" id="slide-8">
+    <div class="slide-content">
+      <p class="section-tag">PART 4 · 财富裂变</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.5em;">"三代 1 带 6"<br>百万年薪复制模型</h2>
+      <div class="divider-line"></div>
+      <div style="display:flex;justify-content:center;gap:1em;flex-wrap:wrap;margin:1em 0;">
+        <div class="highlight-box" style="text-align:center;padding:0.8em 1.2em;min-width:120px;">
+          <p style="font-family:'Noto Serif SC';font-size:clamp(0.6rem,1vw,0.75rem);color:#A08060;margin-bottom:0.3em;">第一代</p>
+          <p class="stat-number" style="font-size:clamp(1.4rem,2.5vw,2rem);">6</p>
+          <p class="stat-label">位 VIP</p>
+        </div>
+        <div style="font-size:1.5em;color:#D4C4A8;align-self:center;">→</div>
+        <div class="highlight-box" style="text-align:center;padding:0.8em 1.2em;min-width:120px;">
+          <p style="font-family:'Noto Serif SC';font-size:clamp(0.6rem,1vw,0.75rem);color:#A08060;margin-bottom:0.3em;">第二代</p>
+          <p class="stat-number" style="font-size:clamp(1.4rem,2.5vw,2rem);">36</p>
+          <p class="stat-label">位 VIP</p>
+        </div>
+        <div style="font-size:1.5em;color:#D4C4A8;align-self:center;">→</div>
+        <div class="highlight-box" style="text-align:center;padding:0.8em 1.2em;min-width:120px;">
+          <p style="font-family:'Noto Serif SC';font-size:clamp(0.6rem,1vw,0.75rem);color:#A08060;margin-bottom:0.3em;">第三代</p>
+          <p class="stat-number" style="font-size:clamp(1.4rem,2.5vw,2rem);">216</p>
+          <p class="stat-label">位 VIP</p>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+      <p class="emphasis-text" style="font-size:clamp(1rem,1.8vw,1.35rem);text-align:center;">
+        仅需把最简单的"1带6"向下复制三代<br>
+        市场网络将汇聚近
+        <span style="color:#8B5E3C;font-weight:700;">260 位高净值 VIP</span>
+      </p>
+      <p class="body-text" style="margin-top:0.8em;font-size:clamp(0.75rem,1.3vw,0.95rem);text-align:center;opacity:0.8;">
+        依托高额极差与推荐收益，轻松实现年入百万
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 9: 365天兜底 ========== -->
+  <div class="slide" id="slide-9">
+    <span class="deco-quote-left">"</span>
+    <span class="deco-quote-right">"</span>
+    <div class="slide-content">
+      <p class="section-tag">PART 5 · 绝对合规 · 零风险护城河</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.5em;">给高净值圈层的<br>365 天兜底承诺</h2>
+      <div class="divider-line"></div>
+      <div class="highlight-box" style="border-left-color:#B87050;border-right-color:#B87050;">
+        <p class="body-text" style="text-align:center;font-size:clamp(0.85rem,1.5vw,1.05rem);">
+          合作 1 年内，若业务拓展停滞<br>
+          只要硬性服务核销未超过
+          <span style="color:#8B5E3C;font-weight:700;font-size:1.2em;">¥19,800</span><br>
+          剩余未核销款项，公司
+          <span style="color:#8B5E3C;font-weight:700;">无条件退还</span>
+        </p>
+      </div>
+      <div class="divider-line"></div>
+      <p class="quote-text" style="text-align:center;font-size:clamp(0.8rem,1.5vw,1.05rem);">
+        "最坏的结果，花了一万多<br>做了一次世界级的生命数据检测；<br><br>
+        最好的结果，拿下一个<br>年入百万的大健康风口。"
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 10: 合规长青 ========== -->
+  <div class="slide" id="slide-10">
+    <div class="slide-content">
+      <p class="section-tag">PART 5 · 绝对合规</p>
+      <h2 class="title-main" style="font-size:clamp(1.4rem,3vw,2.4rem);margin-bottom:0.5em;">捍卫品质<br>合规长青</h2>
+      <div class="divider-line"></div>
+      <div style="display:flex;justify-content:center;gap:3em;flex-wrap:wrap;margin:1.2em 0;">
+        <div style="text-align:center;">
+          <p class="emphasis-text" style="font-size:clamp(0.95rem,1.8vw,1.3rem);">10 日截账</p>
+          <p class="body-text" style="font-size:clamp(0.7rem,1.2vw,0.9rem);opacity:0.8;margin-top:0.3em;">月末发放</p>
+          <p class="body-text" style="font-size:clamp(0.65rem,1.1vw,0.8rem);opacity:0.6;margin-top:0.3em;">资金盘如铁桶般安全</p>
+        </div>
+        <div style="align-self:center;color:#D4C4A8;font-size:1.5em;">·</div>
+        <div style="text-align:center;">
+          <p class="emphasis-text" style="font-size:clamp(0.95rem,1.8vw,1.3rem);">客诉扣回机制</p>
+          <p class="body-text" style="font-size:clamp(0.7rem,1.2vw,0.9rem);opacity:0.8;margin-top:0.3em;">虚假承诺触发全额扣回</p>
+          <p class="body-text" style="font-size:clamp(0.65rem,1.1vw,0.8rem);opacity:0.6;margin-top:0.3em;">用最严机制保护合伙人长远利益</p>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+      <p class="body-text" style="text-align:center;font-size:clamp(0.75rem,1.3vw,0.95rem);opacity:0.75;">
+        最严的机制，保护所有合伙人的长远利益
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 11: 封底 & CTA ========== -->
+  <div class="slide" id="slide-11">
+    <div class="slide-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
+      <p class="section-tag" style="margin-bottom:1.5em;">限时开启</p>
+      <h2 class="title-main" style="font-size:clamp(1.5rem,3.2vw,2.6rem);margin-bottom:0.4em;">离火已至</h2>
+      <p class="slogan-text" style="margin-bottom:1em;">时初之光已为你点燃</p>
+      <div class="divider-line" style="width:8em;margin:1.2em auto;"></div>
+      <p class="body-text" style="font-size:clamp(0.8rem,1.5vw,1.05rem);text-align:center;line-height:2.2;">
+        首批 100 席开门红通道正式开启<br><br>
+        做生命时钟的掌控者<br>
+        做时光红利的同行人
+      </p>
+      <div class="divider-line" style="width:6em;margin:1.2em auto;"></div>
+      <p class="emphasis-text" style="font-size:clamp(0.9rem,1.7vw,1.2rem);text-align:center;color:#8B5E3C;">
+        现在签约，即刻开启<br>全息生命密码检测
+      </p>
+      <p class="body-text" style="margin-top:2em;font-size:clamp(0.6rem,1vw,0.75rem);opacity:0.5;letter-spacing:0.2em;">
+        TIMENOVO · 时初之光 · 2025
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 进度条 -->
+<div class="progress-bar" id="progressBar"></div>
+<!-- 页码 -->
+<div class="page-number" id="pageNumber">1 / 11</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const pageNumber = document.getElementById('pageNumber');
+  let currentSlide = 0;
+
+  // 初始化进度条
+  slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.className = `progress-dot ${index === 0 ? 'active' : ''}`;
+    dot.addEventListener('click', () => goToSlide(index));
+    progressBar.appendChild(dot);
+  });
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active', 'prev');
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else if (index < currentSlide) {
+        slide.classList.add('prev');
+      }
+    });
+    document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+    pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+  }
+  function prevSlide() {
+    if (currentSlide > 0) { currentSlide--; updateSlides(); }
+  }
+  function goToSlide(index) {
+    currentSlide = index; updateSlides();
+  }
+
+  // 键盘
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    else if (e.key === 'ArrowLeft') prevSlide();
+  });
+
+  // 触摸滑动
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+  });
+</script>
+
+</body>
+</html>
