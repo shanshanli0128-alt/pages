@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小红书 IP 商业化运营实战手册 | Vintage Editorial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Ma+Shan+Zheng&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #FAF5EB;
+      --deep-brown: #2C1810;
+      --mid-brown: #7A5238;
+      --gold: #B8863A;
+      --light-gold: #D4C49E;
+      --warm-gray: #8A7A6A;
+      --dark-bg: #1E120A;
+      --burgundy: #6B2D3D;
+      --cream-dark: #E8E0D0;
+    }
+
+    body {
+      font-family: 'Noto Serif SC', 'PingFang SC', 'Source Han Serif CN', 'SimSun', serif;
+      background: var(--deep-brown);
+      color: var(--cream);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .slides-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--deep-brown);
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      max-width: 1100px;
+      max-height: 780px;
+      aspect-ratio: 1100 / 780;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(60px);
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      overflow: hidden;
+      background: var(--cream);
+      box-shadow: 0 4px 40px rgba(60, 30, 10, 0.08);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .slide.prev {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    /* Vintage border decoration */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 62%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--light-gold), transparent);
+    }
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 62%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--light-gold), transparent);
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      width: 88%;
+      max-width: 900px;
+      padding: 2rem 2.5rem;
+    }
+
+    .progress-bar {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 7px;
+      z-index: 200;
+    }
+    .progress-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--light-gold);
+      cursor: pointer;
+      transition: all 0.3s;
+      opacity: 0.4;
+    }
+    .progress-dot.active {
+      background: var(--gold);
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    .progress-dot:hover { opacity: 0.8; }
+
+    .page-number {
+      position: fixed;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.75rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.1em;
+      z-index: 200;
+    }
+
+    /* Typography */
+    .title-main {
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      color: var(--deep-brown);
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      margin-bottom: 0.5em;
+    }
+    .title-sub {
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 400;
+      font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+      color: var(--mid-brown);
+      letter-spacing: 0.12em;
+      line-height: 1.8;
+    }
+    .section-tag {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--warm-gray);
+      margin-bottom: 1em;
+      opacity: 0.8;
+    }
+    .body-text {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+      font-weight: 400;
+      color: var(--deep-brown);
+      line-height: 2;
+      letter-spacing: 0.04em;
+    }
+    .emphasis-text {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 600;
+      color: var(--deep-brown);
+      line-height: 1.8;
+    }
+    .slogan-text {
+      font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      line-height: 1.8;
+    }
+    .quote-text {
+      font-family: 'Noto Serif SC', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+      color: var(--mid-brown);
+      line-height: 2;
+    }
+    .divider-line {
+      width: 3em;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--light-gold), transparent);
+      margin: 1em auto;
+    }
+    .highlight-box {
+      background: linear-gradient(135deg, #F7F0E3, #EDE6D5);
+      border-left: 3px solid var(--gold);
+      border-right: 3px solid var(--gold);
+      padding: 1.2em 1.8em;
+      margin: 1em 0;
+      border-radius: 2px;
+    }
+    .stat-number {
+      font-family: 'Inter', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+      color: var(--warm-gray);
+      letter-spacing: 0.1em;
+      margin-top: 0.4em;
+    }
+
+    /* Color variants */
+    .bg-dark { background: var(--dark-bg) !important; }
+    .text-cream { color: var(--cream) !important; }
+    .text-gold { color: var(--gold) !important; }
+    .text-light-gold { color: var(--light-gold) !important; }
+    .border-gold { border-color: var(--gold) !important; }
+    .bg-burgundy { background: var(--burgundy) !important; }
+    .border-burgundy { border-color: var(--burgundy) !important; }
+    .bg-cream-dark { background: var(--cream-dark) !important; }
+
+    /* Content list */
+    .content-list {
+      list-style: none;
+      text-align: left;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .content-list li {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.75rem, 1.4vw, 1rem);
+      color: var(--deep-brown);
+      line-height: 2.2;
+      padding-left: 1.2em;
+      position: relative;
+    }
+    .content-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--light-gold);
+      font-size: 1.4em;
+      line-height: 1.6;
+    }
+
+    /* Key point box */
+    .key-box {
+      background: linear-gradient(135deg, #F7F0E3, #EDE6D5);
+      border-left: 4px solid var(--burgundy);
+      border-right: 4px solid var(--burgundy);
+      padding: 1em 1.5em;
+      margin: 0.8em 0;
+    }
+
+    /* Flow diagram */
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      flex-wrap: wrap;
+      margin: 1em 0;
+    }
+    .flow-node {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+      background: #F7F0E3;
+      border: 1px solid var(--light-gold);
+      padding: 0.5em 1em;
+      color: var(--deep-brown);
+      text-align: center;
+    }
+    .flow-arrow { font-size: 1.2em; color: var(--gold); }
+
+    /* Slide-specific styles */
+    .corner-deco {
+      position: absolute;
+      width: 0.7rem;
+      height: 0.7rem;
+    }
+    .corner-deco-tl {
+      top: 0.3rem; left: 0.4rem;
+      border-top: 2px solid var(--light-gold);
+      border-left: 2px solid var(--light-gold);
+    }
+    .corner-deco-br {
+      bottom: 0.3rem; right: 0.4rem;
+      border-bottom: 2px solid var(--light-gold);
+      border-right: 2px solid var(--light-gold);
+    }
+    .slide-dark .corner-deco {
+      border-color: var(--gold);
+    }
+
+    /* Big quote */
+    .big-quote-left {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 5rem;
+      color: var(--light-gold);
+      position: absolute;
+      top: 0.5rem; left: 1rem;
+      opacity: 0.5;
+      user-select: none;
+    }
+
+    /* Platform card */
+    .platform-card {
+      background: var(--cream-dark);
+      border-top: 3px solid var(--mid-brown);
+      padding: 0.8em 1.2em;
+      text-align: center;
+    }
+    .platform-card.burgundy-card {
+      background: var(--burgundy);
+      border-top-color: var(--burgundy);
+    }
+
+    /* Two column */
+    .two-col {
+      display: flex;
+      gap: 2em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .col-left, .col-right {
+      flex: 1;
+      min-width: 250px;
+      text-align: left;
+    }
+    .col-divider {
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--light-gold), transparent);
+    }
+
+    /* Funnel */
+    .funnel-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+    .funnel-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3em;
+    }
+    .funnel-block {
+      padding: 0.4em 1em;
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+      text-align: center;
+    }
+    .funnel-block.wide { background: #D8CEC0; color: var(--warm-gray); }
+    .funnel-block.narrow { background: #E8E0D0; color: var(--mid-brown); }
+    .funnel-block.narrowest { background: #F0E8DA; color: var(--deep-brown); font-weight: 600; }
+    .funnel-block.dark { background: var(--burgundy); color: var(--cream); }
+    .funnel-block.dark-mid { background: var(--mid-brown); color: var(--cream); }
+
+    /* 8 elements grid */
+    .elem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6em 2em;
+      max-width: 800px;
+      margin: 0.8em auto;
+    }
+    .elem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+    }
+    .elem-num {
+      background: var(--burgundy);
+      color: var(--cream);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2em 0.5em;
+      border-radius: 2px;
+      flex-shrink: 0;
+      font-family: 'Inter', serif;
+    }
+    .elem-title {
+      font-weight: 700;
+      font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+      color: var(--deep-brown);
+      font-family: 'Noto Serif SC', serif;
+    }
+    .elem-desc {
+      font-size: clamp(0.65rem, 1vw, 0.8rem);
+      color: var(--warm-gray);
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    /* Comparison */
+    .compare-box {
+      border-top: 3px solid;
+      padding: 0.8em 1em;
+      text-align: center;
+    }
+    .compare-box.red { border-color: #AA6655; background: #F8F0EE; }
+    .compare-box.green { border-color: var(--burgundy); background: var(--cream-dark); }
+
+    /* Methods */
+    .method-row {
+      display: flex;
+      gap: 1.5em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .method-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    /* Tip items */
+    .tip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8em 2em;
+      max-width: 800px;
+      margin: 0.8em auto;
+    }
+    .tip-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+    }
+    .tip-gold-bar {
+      width: 3px;
+      height: 2.5em;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.1em;
+    }
+    .tip-text {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.65rem, 1vw, 0.8rem);
+      color: var(--warm-gray);
+      line-height: 1.6;
+    }
+
+    /* AI stages */
+    .ai-stages {
+      display: flex;
+      gap: 0.5em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .ai-stage {
+      background: var(--burgundy);
+      padding: 0.5em 1em;
+      text-align: center;
+      min-width: 130px;
+    }
+    .ai-stage-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.7rem, 1.1vw, 0.85rem);
+      color: var(--cream);
+      font-weight: 600;
+      margin-bottom: 0.3em;
+    }
+    .ai-stage-en {
+      font-family: 'Inter', serif;
+      font-size: 0.6rem;
+      color: var(--light-gold);
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+    .ai-stage-desc {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+      color: var(--cream-dark);
+      margin-top: 0.4em;
+      line-height: 1.5;
+    }
+
+    /* SOP phases */
+    .sop-phases {
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .sop-phase {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3em;
+    }
+    .sop-tag {
+      background: var(--burgundy);
+      color: var(--cream);
+      font-family: 'Noto Serif SC', serif;
+      font-size: 0.7rem;
+      padding: 0.2em 0.8em;
+      font-weight: 600;
+    }
+    .sop-desc {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+      color: var(--warm-gray);
+      max-width: 200px;
+      line-height: 1.5;
+    }
+
+    /* Large background text */
+    .bg-text {
+      position: absolute;
+      font-family: 'Inter', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      color: rgba(232, 224, 208, 0.15);
+      right: 1rem;
+      bottom: 1.5rem;
+      text-align: right;
+      line-height: 1.1;
+      user-select: none;
+      letter-spacing: -2px;
+    }
+    .bg-text-2 {
+      position: absolute;
+      font-family: 'Inter', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: rgba(232, 224, 208, 0.12);
+      left: 0.5rem;
+      bottom: 1rem;
+      text-align: left;
+      user-select: none;
+      letter-spacing: -1px;
+    }
+
+    @media (max-width: 768px) {
+      .slide {
+        max-width: 100vw;
+        max-height: 100vh;
+        width: 100vw;
+        height: 100vh;
+        aspect-ratio: unset;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slides-container" id="slidesContainer">
+
+  <!-- ===== SLIDE 1: 封面 ===== -->
+  <div class="slide active bg-dark" id="slide-1" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div class="corner-deco corner-deco-tl" style="border-color:var(--light-gold);position:absolute;top:0.3rem;left:0.4rem;"></div>
+    <div class="corner-deco corner-deco-br" style="border-color:var(--light-gold);position:absolute;bottom:0.3rem;right:0.4rem;"></div>
+    <div style="text-align:center;padding:2rem;">
+      <p class="section-tag text-light-gold" style="margin-bottom:1.5em;letter-spacing:0.4em;">小红书 IP 商业化运营 · 实战手册</p>
+      <h1 style="font-family:'Noto Serif SC',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:700;color:var(--cream);letter-spacing:0.1em;line-height:1.1;margin-bottom:0.3em;">2026</h1>
+      <h2 style="font-family:'Noto Serif SC',serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--cream);letter-spacing:0.06em;margin-bottom:0.3em;">小红书 IP 商业化运营</h2>
+      <p style="font-family:'Ma Shan Zheng',serif;font-size:clamp(1.2rem,2.5vw,2rem);color:var(--light-gold);letter-spacing:0.2em;margin-bottom:1.5em;">实 战 手 册</p>
+      <div class="divider-line" style="width:6em;margin:1em auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);height:2px;"></div>
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.65rem,1vw,0.8rem);color:var(--warm-gray);letter-spacing:0.15em;line-height:2;">IP 的深度比广度更重要 · 真实是唯一的必杀技 · AI 是你的放大器</p>
+      <p style="font-family:'Inter',serif;font-size:0.65rem;color:var(--warm-gray);letter-spacing:0.3em;margin-top:3em;opacity:0.6;">TIMENOVA · 2026</p>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 2: M 型分化 ===== -->
+  <div class="slide" id="slide-2">
+    <span class="big-quote-left">❝</span>
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 1 · 认知刷新</p>
+      <div style="display:flex;align-items:flex-start;gap:0.8em;margin-bottom:0.5em;">
+        <div style="width:3px;height:3em;background:var(--gold);flex-shrink:0;margin-top:0.2em;"></div>
+        <div style="text-align:left;">
+          <h2 class="title-main" style="font-size:clamp(1.5rem,3vw,2.5rem);text-align:left;">M 型分化</h2>
+          <p class="title-sub" style="text-align:left;">消费市场的卡位逻辑</p>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+
+      <div class="two-col" style="margin:0.8em 0;">
+        <div class="col-left" style="text-align:left;">
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.8rem;color:var(--gold);font-weight:600;margin-bottom:0.3em;">左侧</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;color:var(--deep-brown);margin-bottom:0.3em;">理性回归</p>
+          <p class="body-text" style="font-size:0.85rem;line-height:1.8;">追求极致性价比、省钱、避坑<br>用户会为了 1 块钱反复比价</p>
+        </div>
+        <div class="col-right" style="text-align:left;">
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.8rem;color:var(--gold);font-weight:600;margin-bottom:0.3em;">右侧</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;color:var(--deep-brown);margin-bottom:0.3em;">品质悦己</p>
+          <p class="body-text" style="font-size:0.85rem;line-height:1.8;">为健康长寿、情绪价值、产品创新、稀缺体验支付溢价</p>
+        </div>
+      </div>
+
+      <p style="font-family:'Inter',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;color:var(--light-gold);text-align:center;line-height:1;margin:0.3em 0;opacity:0.7;">M</p>
+
+      <div class="key-box" style="text-align:left;margin:0.5em 0;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.6vw,1.15rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.4em;">建议卡位右侧 · 强调「生命资产」与「决策成本」</p>
+        <p class="quote-text" style="font-size:clamp(0.75rem,1.2vw,0.9rem);">「我们不卖产品，我们提供提升生命质量和时间资产的解决方案。」</p>
+      </div>
+      <p class="body-text" style="font-size:0.75rem;text-align:left;opacity:0.7;margin-top:0.5em;">避坑：不要在文案里强调「便宜」，避开省钱逻辑</p>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 3: 平台性格差异 ===== -->
+  <div class="slide" id="slide-3">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 1 · 认知刷新</p>
+      <h2 class="title-main">平台性格差异</h2>
+      <p class="title-sub">为什么首选小红书？</p>
+      <div class="divider-line"></div>
+
+      <div style="display:flex;gap:1em;justify-content:center;flex-wrap:wrap;margin:1em 0;">
+        <div style="flex:1;min-width:180px;">
+          <div class="platform-card" style="background:#CCBBAA;border-top-color:#8A7A6A;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.85rem,1.5vw,1rem);font-weight:700;color:var(--cream);">抖音</p>
+            <p class="body-text" style="font-size:0.8rem;line-height:1.8;margin-top:0.5em;">强刺激、快节奏<br>流量随看随走<br>适合规模化大流量博弈</p>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <div class="platform-card" style="background:#8A7A6A;border-top-color:#7A5238;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.85rem,1.5vw,1rem);font-weight:700;color:var(--cream);">视频号</p>
+            <p class="body-text" style="font-size:0.8rem;line-height:1.8;margin-top:0.5em;">熟人社交<br>信任底色厚<br>但破圈慢</p>
+          </div>
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <div class="platform-card burgundy-card">
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.85rem,1.5vw,1rem);font-weight:700;color:var(--cream);">小红书 ★</p>
+            <p class="body-text" style="font-size:0.8rem;line-height:1.8;margin-top:0.5em;">「生活百科全书」<br>用户带着「需求」搜索<br>转化路径最短</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:left;margin-top:0.8em;">
+        <p style="font-size:0.75rem;color:var(--gold);font-weight:700;letter-spacing:0.2em;margin-bottom:0.3em;">核心认知</p>
+        <p style="font-family:'Noto Serif SC',serif;font-size:clamp(1rem,1.8vw,1.3rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.2em;">小红书本质是「国民消费决策的第一入口」</p>
+        <p class="body-text" style="font-size:0.9rem;">是小个体实现「小而美」商业闭环的最佳阵地</p>
+      </div>
+
+      <div style="margin-top:0.8em;text-align:left;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.65rem,1vw,0.78rem);color:var(--warm-gray);line-height:1.8;">精准词库占领：「细胞抗衰、慢性疲劳、生物年龄、细胞营养」</p>
+        <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.65rem,1vw,0.78rem);color:var(--warm-gray);line-height:1.8;">逻辑：用户带着「目的」搜索，成交意向比刷短视频的用户高 10 倍</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 4: 反漏斗营销模型 ===== -->
+  <div class="slide" id="slide-4">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 2 · 流量底层逻辑</p>
+      <h2 class="title-main">反漏斗模型</h2>
+      <p class="title-sub">从小众人群引爆大众</p>
+      <div class="divider-line"></div>
+
+      <div style="display:flex;justify-content:center;align-items:center;gap:1.5em;flex-wrap:wrap;margin:0.8em 0;">
+        <!-- Traditional -->
+        <div style="text-align:center;">
+          <div style="background:#CCBBAA;padding:0.3em 1em;font-family:'Noto Serif SC',serif;font-size:0.78rem;color:var(--cream);font-weight:600;margin-bottom:0.5em;">传统正漏斗 — 大海捞针</div>
+          <div class="funnel-block wide" style="width:9em;">泛人群</div>
+          <div style="display:flex;justify-content:center;"><div class="funnel-block narrow" style="width:7em;">高潜人群</div></div>
+          <div style="display:flex;justify-content:center;"><div class="funnel-block narrowest" style="width:5em;">核心人群</div></div>
+          <p style="font-size:0.75rem;color:#AA6655;margin-top:0.4em;">层层损耗 ❌</p>
+        </div>
+
+        <div style="font-size:1.8rem;color:var(--gold);align-self:center;">→</div>
+
+        <!-- Anti-funnel -->
+        <div style="text-align:center;">
+          <div style="background:var(--burgundy);padding:0.3em 1em;font-family:'Noto Serif SC',serif;font-size:0.78rem;color:var(--cream);font-weight:600;margin-bottom:0.5em;">反漏斗模型 — 精准渗透 ✓</div>
+          <div class="funnel-block narrowest" style="width:5em;background:#F0E8DA;">核心人群</div>
+          <div style="display:flex;justify-content:center;"><div class="funnel-block narrow" style="width:7em;background:#E8E0D0;">高潜人群</div></div>
+          <div style="display:flex;justify-content:center;"><div class="funnel-block wide" style="width:9em;background:#D8CEC0;color:var(--mid-brown);">泛人群</div></div>
+          <p style="font-size:0.75rem;color:var(--burgundy);margin-top:0.4em;">引爆扩散破圈 ✅</p>
+        </div>
+      </div>
+
+      <div style="margin-top:1em;">
+        <div class="key-box" style="background:linear-gradient(135deg,#F7F0E3,#EDE6D5);border-color:var(--burgundy);">
+          <p class="quote-text" style="font-size:clamp(0.85rem,1.4vw,1.05rem);text-align:center;font-style:normal;">「在小红书，你不需要一上来就讨好所有人，<br>只要搞定那 100 个精准的核心人群，系统自然会带你「破圈」。」</p>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:2em;flex-wrap:wrap;margin-top:0.8em;">
+        <div style="text-align:center;">
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.78rem;color:var(--warm-gray);margin-bottom:0.2em;">第一步</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.9rem;font-weight:700;color:var(--burgundy);">搞定核心发烧友</p>
+        </div>
+        <div style="text-align:center;">
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.78rem;color:var(--warm-gray);margin-bottom:0.2em;">第二步</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.9rem;font-weight:700;color:var(--burgundy);">KOC 触发算法</p>
+        </div>
+        <div style="text-align:center;">
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.78rem;color:var(--warm-gray);margin-bottom:0.2em;">第三步</p>
+          <p style="font-family:'Noto Serif SC',serif;font-size:0.9rem;font-weight:700;color:var(--burgundy);">全网破圈</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 5: 内容三维价值公式 ===== -->
+  <div class="slide" id="slide-5">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 2 · 流量底层逻辑</p>
+      <h2 class="title-main" style="letter-spacing:0.06em;">内容三维价值公式</h2>
+      <div class="divider-line"></div>
+
+      <div style="display:flex;gap:0.8em;justify-content:center;flex-wrap:wrap;margin:0.8em 0;">
+        <div style="flex:1;min-width:200px;max-width:260px;">
+          <div style="background:var(--gold);padding:0.5em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.4vw,1.1rem);font-weight:700;color:var(--cream);">功能价值 · 有用</p>
+          </div>
+          <p style="font-family:'Inter',serif;font-size:0.6rem;color:var(--warm-gray);letter-spacing:3px;text-align:center;margin:0.3em 0;">FUNCTIONAL</p>
+          <p class="body-text" style="font-size:clamp(0.7rem,1.1vw,0.85rem);text-align:center;line-height:1.7;">帮用户解决实际问题<br>硬核干货 · 检测报告拆解 · 补剂避坑</p>
+        </div>
+        <div style="flex:1;min-width:200px;max-width:260px;">
+          <div style="background:var(--burgundy);padding:0.5em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.4vw,1.1rem);font-weight:700;color:var(--cream);">情绪价值 · 共鸣</p>
+          </div>
+          <p style="font-family:'Inter',serif;font-size:0.6rem;color:var(--warm-gray);letter-spacing:3px;text-align:center;margin:0.3em 0;">EMOTIONAL</p>
+          <p class="body-text" style="font-size:clamp(0.7rem,1.1vw,0.85rem);text-align:center;line-height:1.7;">给人向往、治愈、共鸣<br>摆脱脑雾的心路历程 · 对 50 岁的向往</p>
+        </div>
+        <div style="flex:1;min-width:200px;max-width:260px;">
+          <div style="background:var(--mid-brown);padding:0.5em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.4vw,1.1rem);font-weight:700;color:var(--cream);">货币价值 · 值钱</p>
+          </div>
+          <p style="font-family:'Inter',serif;font-size:0.6rem;color:var(--warm-gray);letter-spacing:3px;text-align:center;margin:0.3em 0;">MONETARY</p>
+          <p class="body-text" style="font-size:clamp(0.7rem,1.1vw,0.85rem);text-align:center;line-height:1.7;">帮用户节省决策成本<br>精准干预如何省下未来 10 年医疗费</p>
+        </div>
+      </div>
+
+      <div class="key-box" style="margin-top:0.8em;border-color:var(--burgundy);">
+        <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.5vw,1.15rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.3em;">一个爆款 IP 至少占两个维度，占三个就是「超级内容」</p>
+        <p class="body-text" style="font-size:0.85rem;">三者合一 = 功能（干货）+ 情绪（共鸣）+ 货币（省钱）</p>
+        <p class="body-text" style="font-size:0.75rem;font-style:italic;opacity:0.7;">例：只发风景照 = 情绪价值；加上路线避坑 = 功能价值；再分享订房技巧 = 货币价值</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 6: 商业定位 ===== -->
+  <div class="slide" id="slide-6">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 3 · 商业定位</p>
+      <h2 class="title-main">流量 IP vs 产品 IP</h2>
+      <p class="title-sub">核心选择</p>
+      <div class="divider-line"></div>
+
+      <div style="display:flex;justify-content:center;align-items:center;gap:1em;flex-wrap:wrap;margin:0.8em 0;">
+        <!-- 流量 IP -->
+        <div style="flex:1;min-width:240px;max-width:320px;">
+          <div style="background:var(--warm-gray);padding:0.5em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;color:var(--cream);">流量 IP</p>
+          </div>
+          <div style="background:#F5F0E8;padding:0.8em;text-align:center;">
+            <p class="body-text" style="font-size:0.78rem;">内容创作者身份</p>
+            <p class="body-text" style="font-size:0.85rem;line-height:1.8;">通过博眼球攒粉丝<br>接广告变现</p>
+            <p style="font-size:0.75rem;color:#AA6655;margin-top:0.4em;">难度：创作难，变现周期长</p>
+          </div>
+        </div>
+
+        <div style="font-family:'Inter',serif;font-size:1.4rem;font-weight:700;color:var(--light-gold);align-self:center;">VS</div>
+
+        <!-- 产品 IP -->
+        <div style="flex:1;min-width:240px;max-width:320px;">
+          <div style="background:var(--burgundy);padding:0.5em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;color:var(--cream);">产品 IP ★ 推荐</p>
+          </div>
+          <div style="background:#F5F0E8;padding:0.8em;text-align:center;">
+            <p class="body-text" style="font-size:0.78rem;">产品主理人 / 商家身份</p>
+            <p class="body-text" style="font-size:0.85rem;line-height:1.8;">围绕产品解决问题<br>变现路径极短</p>
+            <p style="font-size:0.75rem;color:var(--burgundy);margin-top:0.4em;font-weight:600;">难度：低 · 变现快 ✅</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1em;text-align:left;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:0.8rem;color:var(--gold);font-weight:700;letter-spacing:0.15em;margin-bottom:0.3em;">KOS = Key Opinion Sales</p>
+        <p class="quote-text" style="font-size:clamp(0.85rem,1.4vw,1.05rem);text-align:left;font-style:normal;margin-bottom:0.3em;">「让别人喜欢我很难，但把东西卖出去很简单。」</p>
+        <p class="body-text" style="font-size:0.9rem;text-align:left;">每一个人都是最强的种草机 — 人即服务</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 7: 爆款选题 8 黄金元素 ===== -->
+  <div class="slide" id="slide-7">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 4 · 实战工具包</p>
+      <h2 class="title-main" style="letter-spacing:0.1em;">爆款选题</h2>
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.5vw,1.15rem);color:var(--gold);letter-spacing:0.2em;margin-bottom:0.3em;">8 个黄金元素</p>
+      <div class="divider-line"></div>
+
+      <div class="elem-grid">
+        <div class="elem-item">
+          <span class="elem-num">①</span>
+          <div>
+            <p class="elem-title">反常识</p>
+            <p class="elem-desc">体检全绿，为什么你还是每天累得想断电？</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">②</span>
+          <div>
+            <p class="elem-title">数字量化</p>
+            <p class="elem-desc">5 个指标，揭秘你的真实生物年龄</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">③</span>
+          <div>
+            <p class="elem-title">身份共鸣</p>
+            <p class="elem-desc">给 35 岁还在熬夜的创业者</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">④</span>
+          <div>
+            <p class="elem-title">反向避雷</p>
+            <p class="elem-desc">别再乱吃 NMN 了，这三种人纯属交智商税</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">⑤</span>
+          <div>
+            <p class="elem-title">低门槛</p>
+            <p class="elem-desc">每天 15 分钟，激活细胞线粒体</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">⑥</span>
+          <div>
+            <p class="elem-title">结果对比</p>
+            <p class="elem-desc">90 天深度睡眠从 20% 变 45%</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">⑦</span>
+          <div>
+            <p class="elem-title">利益钩子</p>
+            <p class="elem-desc">评论区发「测评」，送你《职场精力修复方案》</p>
+          </div>
+        </div>
+        <div class="elem-item">
+          <span class="elem-num">⑧</span>
+          <div>
+            <p class="elem-title">权威背书</p>
+            <p class="elem-desc">带你走进 TimeNova 功能医学实验室</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:0.8em;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:0.75rem;color:var(--gold);font-weight:700;margin-bottom:0.5em;">找选题的 3 种实战方法</p>
+        <div class="method-row">
+          <div class="method-item"><span>🔍</span><span>低粉高赞法：粉丝 &lt;1000 · 赞 &gt;500，直接拆解选题切入点</span></div>
+          <div class="method-item"><span>💬</span><span>评论区挖宝法：高赞评论 = 用户真实需求</span></div>
+          <div class="method-item"><span>🏠</span><span>线下复刻法：现实客户问题 = 最直接选题来源</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 8: 活人感语言 ===== -->
+  <div class="slide" id="slide-8">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 5 · 内容生产全链路</p>
+      <h2 class="title-main" style="letter-spacing:0.08em;">活人感语言</h2>
+      <p class="title-sub">内容生产全链路</p>
+      <div class="divider-line"></div>
+
+      <div style="display:flex;gap:1em;justify-content:center;flex-wrap:wrap;margin:0.8em 0;">
+        <div style="flex:1;min-width:260px;max-width:380px;">
+          <div style="background:#AA6655;padding:0.4em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:0.9rem;font-weight:700;color:var(--cream);">❌ 说明书式表达</p>
+          </div>
+          <div style="background:#F8F0EE;padding:0.8em;text-align:left;">
+            <p class="quote-text" style="font-size:clamp(0.75rem,1.2vw,0.9rem);text-align:left;">「本方案包含高浓度辅酶 Q10，吸收率提升 30%」</p>
+          </div>
+        </div>
+        <div style="flex:1;min-width:260px;max-width:380px;">
+          <div style="background:var(--burgundy);padding:0.4em;text-align:center;">
+            <p style="font-family:'Noto Serif SC',serif;font-size:0.9rem;font-weight:700;color:var(--cream);">✅ 活人感表达</p>
+          </div>
+          <div style="background:#F5F0E8;padding:0.8em;text-align:left;">
+            <p class="quote-text" style="font-size:clamp(0.75rem,1.2vw,0.9rem);text-align:left;">「喝完就像给心脏装了个发电机」<br>「以前爬两层楼就喘，现在神清气爽，太治愈了」</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-grid" style="margin-top:0.8em;">
+        <div class="tip-item">
+          <div class="tip-gold-bar"></div>
+          <div>
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.75rem,1.2vw,0.9rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.2em;">五感化描述</p>
+            <p class="tip-text">不要说「吸收好」，要说「咻的一下感觉脑子亮了」</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-gold-bar"></div>
+          <div>
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.75rem,1.2vw,0.9rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.2em;">拒绝说教</p>
+            <p class="tip-text">多用「我发现」「我亲测」，少用「你应该」「必须」</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-gold-bar"></div>
+          <div>
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.75rem,1.2vw,0.9rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.2em;">加入动作</p>
+            <p class="tip-text">「咻的一下」「一口下去嗓子眼儿都冒凉气儿」</p>
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-gold-bar"></div>
+          <div>
+            <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.75rem,1.2vw,0.9rem);font-weight:700;color:var(--deep-brown);margin-bottom:0.2em;">方言词汇</p>
+            <p class="tip-text">「姐妹们这个真的绝了！巨有用！闭眼冲！」</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 9: AI 赋能 ===== -->
+  <div class="slide" id="slide-9">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 6 · AI 赋能</p>
+      <h2 class="title-main" style="letter-spacing:0.1em;">AI 赋能</h2>
+      <p class="title-sub">轻量化 1 人团队运营</p>
+      <div class="divider-line"></div>
+
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(1rem,1.8vw,1.3rem);font-weight:700;color:var(--burgundy);letter-spacing:0.05em;margin-bottom:0.8em;">「AI 时代，你一个人就是一支军队」</p>
+
+      <div class="ai-stages" style="margin:0.8em 0;gap:0.3em;">
+        <div class="ai-stage">
+          <p class="ai-stage-title">📋 选题阶段</p>
+          <p class="ai-stage-en">IDEA</p>
+          <p class="ai-stage-desc">DeepSeek / Gemini<br>一键生成三维价值初稿</p>
+        </div>
+        <div style="font-size:1.4rem;color:var(--gold);align-self:center;">→</div>
+        <div class="ai-stage">
+          <p class="ai-stage-title">✍️ 脚本阶段</p>
+          <p class="ai-stage-en">SCRIPT</p>
+          <p class="ai-stage-desc">AI 生成<br>爆款文案脚本</p>
+        </div>
+        <div style="font-size:1.4rem;color:var(--gold);align-self:center;">→</div>
+        <div class="ai-stage">
+          <p class="ai-stage-title">🎨 视觉阶段</p>
+          <p class="ai-stage-en">VISUAL</p>
+          <p class="ai-stage-desc">AI 生成封面图<br>实验室风 / 高端生活风</p>
+        </div>
+        <div style="font-size:1.4rem;color:var(--gold);align-self:center;">→</div>
+        <div class="ai-stage">
+          <p class="ai-stage-title">💬 回复阶段</p>
+          <p class="ai-stage-en">REPLY</p>
+          <p class="ai-stage-desc">OpenClaw 自动监控<br>评论区秒级回复</p>
+        </div>
+      </div>
+
+      <div style="margin-top:0.8em;text-align:left;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:0.8rem;color:var(--gold);font-weight:700;margin-bottom:0.4em;">账号体检</p>
+        <div style="display:flex;gap:2em;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:0.5em;">
+            <span style="font-family:'Inter',serif;font-size:0.75rem;font-weight:700;color:var(--burgundy);background:#F0E8DA;padding:0.2em 0.6em;border-radius:2px;">CTR</span>
+            <span class="body-text" style="font-size:0.8rem;">点击率低 → 封面标题没抓准痛点</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5em;">
+            <span style="font-family:'Inter',serif;font-size:0.75rem;font-weight:700;color:var(--burgundy);background:#F0E8DA;padding:0.2em 0.6em;border-radius:2px;">CPE</span>
+            <span class="body-text" style="font-size:0.8rem;">互动率低 → 内容太硬缺乏共鸣</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 10: 变现闭环 & 起号 SOP ===== -->
+  <div class="slide" id="slide-10">
+    <div class="slide-content">
+      <p class="section-tag">CHAPTER 7 · 变现闭环</p>
+      <h2 class="title-main">从流量到个人资产</h2>
+      <p class="title-sub">变现闭环</p>
+      <div class="divider-line"></div>
+
+      <!-- 私域闭环 -->
+      <div class="flow-diagram" style="margin:0.6em 0;">
+        <div class="flow-node" style="border-color:var(--burgundy);font-weight:600;color:var(--burgundy);">笔记埋钩子</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">评论区引导私信</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node">私信发《测评表》</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node" style="border-color:var(--burgundy);font-weight:600;color:var(--burgundy);">微信深度转化</div>
+      </div>
+      <p class="quote-text" style="font-size:clamp(0.78rem,1.2vw,0.9rem);text-align:center;font-style:normal;margin-bottom:0.8em;">核心话术：不推销，只分析。先帮对方解读报告，再给出诊所建议。</p>
+
+      <div style="border-top:1px solid var(--light-gold);margin:0.5em 0;padding-top:0.5em;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:0.8rem;color:var(--gold);font-weight:700;margin-bottom:0.5em;">起号 SOP</p>
+        <div class="sop-phases">
+          <div class="sop-phase">
+            <span class="sop-tag">准备期</span>
+            <p class="sop-desc">人设三件套：头像 + 昵称 + 简介 · 钩子简介 · 2 篇置顶笔记</p>
+          </div>
+          <div style="font-size:1.2rem;color:var(--light-gold);align-self:center;">→</div>
+          <div class="sop-phase">
+            <span class="sop-tag">启动期</span>
+            <p class="sop-desc">先发 5-10 篇不同侧重点笔记 · 数据赛马，优胜重点投流</p>
+          </div>
+          <div style="font-size:1.2rem;color:var(--light-gold);align-self:center;">→</div>
+          <div class="sop-phase">
+            <span class="sop-tag">爆发期</span>
+            <p class="sop-desc">商业流量注入 · 定向投放核心人群 · 小爆款到大爆款</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 11: 封底 CTA ===== -->
+  <div class="slide bg-dark" id="slide-11" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    <div class="corner-deco corner-deco-tl" style="border-color:var(--light-gold);position:absolute;top:0.3rem;left:0.4rem;"></div>
+    <div class="corner-deco corner-deco-br" style="border-color:var(--light-gold);position:absolute;bottom:0.3rem;right:0.4rem;"></div>
+    <div style="text-align:center;padding:2rem;">
+      <h1 style="font-family:'Inter',serif;font-size:clamp(3rem,6vw,5rem);font-weight:900;color:var(--cream);letter-spacing:0.1em;line-height:1.1;margin-bottom:0.3em;">2026</h1>
+      <h2 style="font-family:'Noto Serif SC',serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--light-gold);letter-spacing:0.1em;margin-bottom:0.3em;">IP 的深度</h2>
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--light-gold);letter-spacing:0.1em;margin-bottom:1em;">比广度更重要</p>
+      <div style="width:6em;height:2px;background:var(--gold);margin:1em auto;"></div>
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(1.2rem,2.2vw,1.8rem);color:var(--cream);letter-spacing:0.08em;line-height:1.8;margin-bottom:0.3em;">真实是唯一的必杀技</p>
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(1.2rem,2.2vw,1.8rem);color:var(--cream);letter-spacing:0.08em;line-height:1.8;margin-bottom:1.5em;">AI 是你的放大器</p>
+      <div style="width:5em;height:1px;background:rgba(184,134,58,0.5);margin:1em auto;"></div>
+      <p style="font-family:'Noto Serif SC',serif;font-size:clamp(0.9rem,1.5vw,1.15rem);color:var(--gold);letter-spacing:0.05em;">让我们在小红书，建立属于你的信任资产</p>
+      <p style="font-family:'Inter',serif;font-size:0.65rem;color:var(--warm-gray);letter-spacing:0.3em;margin-top:3em;opacity:0.6;">TIMENOVA · 2026</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+<!-- Page number -->
+<div class="page-number" id="pageNumber">1 / 11</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progressBar');
+  const pageNumber = document.getElementById('pageNumber');
+  let currentSlide = 0;
+
+  slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.className = `progress-dot ${index === 0 ? 'active' : ''}`;
+    dot.addEventListener('click', () => goToSlide(index));
+    progressBar.appendChild(dot);
+  });
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active', 'prev');
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else if (index < currentSlide) {
+        slide.classList.add('prev');
+      }
+    });
+    document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+    pageNumber.textContent = `${currentSlide + 1} / ${slides.length}`;
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); }
+  }
+  function prevSlide() {
+    if (currentSlide > 0) { currentSlide--; updateSlides(); }
+  }
+  function goToSlide(index) {
+    currentSlide = index; updateSlides();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    else if (e.key === 'ArrowLeft') prevSlide();
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { if (diff > 0) nextSlide(); else prevSlide(); }
+  });
+</script>
+
+</body>
+</html>
